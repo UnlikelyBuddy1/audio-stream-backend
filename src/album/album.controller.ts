@@ -1,9 +1,11 @@
-import { Controller, Get, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { Album } from 'src/entities/album.entity';
 import { User } from 'src/entities/user.entity';
 import { AlbumService } from './album.service';
+import { createAlbumDto } from './dto/create-album-dto';
+import { GetAlbumsFilterDto } from './dto/get-albums-filter.dto';
 
 @Controller('album')
 @UseGuards(AuthGuard())
@@ -13,6 +15,23 @@ export class AlbumController {
     @Get('/:id')
     getalbumById(@Param('id', ParseIntPipe) id : number, @GetUser() user: User): Promise<Album>{
         return this.albumService.getAlbumById(id, user);
+    }
+
+    @Post()
+    @UsePipes(ValidationPipe)
+    createTrack(@Body() createAlbumDto: createAlbumDto, @GetUser() user: User): Promise<Album>{
+        return this.albumService.createTrack(createAlbumDto, user);
+
+    }
+
+    @Get()
+    getTracks(@Query(ValidationPipe) filterDto: GetAlbumsFilterDto, @GetUser() user: User): Promise<Album[]>  {
+        return this.albumService.getAlbums(filterDto, user);
+    }
+
+    @Delete('/:id')
+    deleteTrack(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
+        return this.albumService.deleteAlbum(id, user);
     }
 }
 

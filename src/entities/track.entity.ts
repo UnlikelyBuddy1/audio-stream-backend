@@ -3,7 +3,6 @@ import { Album } from "./album.entity";
 import { Playlist } from "./playlist.entity";
 
 @Entity()
-@Unique(['id'])
 export class Track extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: string;

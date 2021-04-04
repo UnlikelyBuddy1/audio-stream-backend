@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Album } from 'src/entities/album.entity';
 import { User } from 'src/entities/user.entity';
 import { AlbumRepository } from './album.repository';
+import { createAlbumDto } from './dto/create-album-dto';
+import { GetAlbumsFilterDto } from './dto/get-albums-filter.dto';
 
 @Injectable()
 export class AlbumService {
@@ -18,5 +20,19 @@ export class AlbumService {
         }
         return found;
     }
-    
+
+    async createTrack(createAlbumDto: createAlbumDto, user: User): Promise<Album> {
+        return this.albumRepository.createAlbum(createAlbumDto, user);
+    }
+
+    async getAlbums(filterDto: GetAlbumsFilterDto, user: User): Promise<Album[]> {
+        return this.albumRepository.getAlbums(filterDto, user);
+    }
+
+    async deleteAlbum(id: number, user: User): Promise<void> {
+        const result = await this.albumRepository.delete(id);
+        if(result.affected===0) {
+            throw new NotFoundException(`Track with ID "${id}" not found`);
+        }
+    }
 }

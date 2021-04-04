@@ -15,7 +15,7 @@ export class AlbumRepository extends Repository<Album> {
             //query.where('album.userId = :userId', { userId: user.id });
 
             if(search){
-                query.where('album.title = :search', {search});
+                query.where('album.name = :search', {search});
             }
             const albums = await query.getMany();
             console.log(albums);
@@ -28,12 +28,21 @@ export class AlbumRepository extends Repository<Album> {
     }
 
     async createAlbum(createAlbumDto: createAlbumDto, user: User): Promise<Album> {
-        const { name, artists, tracks } = createAlbumDto;
+        const { name, artistIds, trackIds } = createAlbumDto;
         const album = new Album();
         album.name = name;
-        album.artists = artists;
-        album.tracks = tracks;
-        await album.save();
+        if(artistIds){
+            album.artists = Array.from(artistIds).map(artistIds => ({ id: artistIds } as any));
+        }
+        if(trackIds){
+            console.log(trackIds.map(trackIds => ({id: trackIds} as any)));
+            album.tracks = trackIds.map(trackIds => ({id: trackIds} as any));
+        }
+        try {
+            await album.save();
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
         //delete album.user;
         return album;
     }
