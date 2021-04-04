@@ -1,8 +1,8 @@
 import { Controller, Get, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
-import { Album } from 'src/track/entities/album.entity';
+import { Album } from 'src/entities/album.entity';
+import { User } from 'src/entities/user.entity';
 import { AlbumService } from './album.service';
 
 @Controller('album')
@@ -15,6 +15,5 @@ export class AlbumController {
         return this.albumService.getAlbumById(id, user);
     }
 }
-    
 
 

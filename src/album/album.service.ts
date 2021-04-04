@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/auth/user.entity';
-import { Album } from 'src/track/entities/album.entity';
+import { Album } from 'src/entities/album.entity';
+import { User } from 'src/entities/user.entity';
 import { AlbumRepository } from './album.repository';
 
 @Injectable()
@@ -18,4 +18,5 @@ export class AlbumService {
         }
         return found;
     }
+    
 }
