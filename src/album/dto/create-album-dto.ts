@@ -1,14 +1,16 @@
+import { Optional } from '@nestjs/common';
 import { IsNotEmpty } from 'class-validator';
-import { Artist } from 'src/track/entities/artist.entity';
-import { Track } from 'src/track/entities/track.entity';
+import { Artist } from 'src/entities/artist.entity';
+import { Track } from 'src/entities/track.entity';
+
 
 export class createAlbumDto {
     @IsNotEmpty()
     name : string;
 
-    @IsNotEmpty()
+    @Optional()
     tracks :Track[];
 
-    @IsNotEmpty()
+    @Optional()
     artists: Artist[];
 }

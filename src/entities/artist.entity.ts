@@ -11,5 +11,5 @@ export class Artist extends BaseEntity {
 
     @ManyToMany( () => Track)
     @JoinTable()
-    tracks : Track[];    
+    tracks : Track[];
 }

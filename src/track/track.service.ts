@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/auth/user.entity';
+import { Track } from 'src/entities/track.entity';
+import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
-import { GetTracksFilterDto } from './dto/get-tracks-filter.dto';
-import { Track } from './entities/track.entity';
+import { GetTracksFilterDto } from './dto/get-tracks-filter.dto'
 import { TrackRepository } from './track.repository';
 
 @Injectable()

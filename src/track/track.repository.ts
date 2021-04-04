@@ -1,9 +1,9 @@
 import { InternalServerErrorException } from "@nestjs/common";
-import { User } from "src/auth/user.entity";
+import { Track } from "src/entities/track.entity";
+import { User } from "src/entities/user.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { createTrackDto } from "./dto/create-track.dto";
 import { GetTracksFilterDto } from "./dto/get-tracks-filter.dto";
-import { Track } from "./entities/track.entity";
 
 @EntityRepository(Track)
 export class TrackRepository extends Repository<Track> {

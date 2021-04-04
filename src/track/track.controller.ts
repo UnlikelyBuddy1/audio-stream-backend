@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Post, Param, Delete, Patch, UsePipes, ValidationPipe, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { Track } from 'src/entities/track.entity';
+import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
 import { GetTracksFilterDto } from './dto/get-tracks-filter.dto';
-import { Track } from './entities/track.entity';
 import { TrackService } from './track.service';
 
 
@@ -22,10 +22,10 @@ export class TrackController {
     @UsePipes(ValidationPipe)
     createTrack(@Body() createTrackDto: createTrackDto, @GetUser() user: User): Promise<Track>{
         return this.trackService.createTrack(createTrackDto, user);
-        
+
     }
 
-    
+
     @Delete('/:id')
     deleteTrack(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
         return this.trackService.deleteTrack(id, user);

@@ -1,7 +1,6 @@
 import { InternalServerErrorException } from "@nestjs/common";
-import { User } from "src/auth/user.entity";
-import { Album } from "src/track/entities/album.entity";
-import { Track } from "src/track/entities/track.entity";
+import { Album } from "src/entities/album.entity";
+import { User } from "src/entities/user.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { createAlbumDto } from "./dto/create-album-dto";
 import { GetAlbumsFilterDto } from "./dto/get-albums-filter.dto";

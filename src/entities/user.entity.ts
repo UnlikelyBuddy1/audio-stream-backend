@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import * as bcrypt from 'bcrypt';
-import { Playlist } from "src/track/entities/playlist.entity";
+import { Playlist } from "./playlist.entity";
 
 @Entity()
 @Unique(['username'])
