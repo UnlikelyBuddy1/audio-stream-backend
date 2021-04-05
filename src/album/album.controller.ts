@@ -13,24 +13,24 @@ export class AlbumController {
     constructor(private albumService: AlbumService){}
 
     @Get('/:id')
-    getalbumById(@Param('id', ParseIntPipe) id : number, @GetUser() user: User): Promise<Album>{
+    getAlbumById(@Param('id', ParseIntPipe) id : number, @GetUser() user: User): Promise<Album>{
         return this.albumService.getAlbumById(id, user);
     }
 
     @Post()
     @UsePipes(ValidationPipe)
-    createTrack(@Body() createAlbumDto: createAlbumDto, @GetUser() user: User): Promise<Album>{
-        return this.albumService.createTrack(createAlbumDto, user);
+    createAlbum(@Body() createAlbumDto: createAlbumDto, @GetUser() user: User): Promise<Album>{
+        return this.albumService.createAlbum(createAlbumDto, user);
 
     }
 
     @Get()
-    getTracks(@Query(ValidationPipe) filterDto: GetAlbumsFilterDto, @GetUser() user: User): Promise<Album[]>  {
+    getAlbums(@Query(ValidationPipe) filterDto: GetAlbumsFilterDto, @GetUser() user: User): Promise<Album[]>  {
         return this.albumService.getAlbums(filterDto, user);
     }
 
     @Delete('/:id')
-    deleteTrack(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
+    deleteAlbum(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
         return this.albumService.deleteAlbum(id, user);
     }
 }

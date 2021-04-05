@@ -21,7 +21,7 @@ export class AlbumService {
         return found;
     }
 
-    async createTrack(createAlbumDto: createAlbumDto, user: User): Promise<Album> {
+    async createAlbum(createAlbumDto: createAlbumDto, user: User): Promise<Album> {
         return this.albumRepository.createAlbum(createAlbumDto, user);
     }
 
@@ -32,7 +32,7 @@ export class AlbumService {
     async deleteAlbum(id: number, user: User): Promise<void> {
         const result = await this.albumRepository.delete(id);
         if(result.affected===0) {
-            throw new NotFoundException(`Track with ID "${id}" not found`);
+            throw new NotFoundException(`Album with ID "${id}" not found`);
         }
     }
 }
