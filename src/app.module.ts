@@ -6,10 +6,8 @@ import { TrackModule } from './track/track.module';
 import { AlbumModule } from './album/album.module';
 import { ArtistModule } from './artist/artist.module';
 import { GenreModule } from './genre/genre.module';
-import { ControllerModule } from './controller/controller.module';
-import { ServiceModule } from './service/service.module';
-import { GenrController } from './genr/genr.controller';
-
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -19,8 +17,9 @@ import { GenrController } from './genr/genr.controller';
     AlbumModule,
     ArtistModule,
     GenreModule,
-    ControllerModule,
-    ServiceModule,],
-  controllers: [GenrController],
+    AppModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
