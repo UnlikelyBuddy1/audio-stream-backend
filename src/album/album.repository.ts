@@ -32,7 +32,7 @@ export class AlbumRepository extends Repository<Album> {
         const album = new Album();
         album.name = name;
         if(artistIds){
-            album.artists = Array.from(artistIds).map(artistIds => ({ id: artistIds } as any));
+            album.artists = artistIds.map(artistIds => ({ id: artistIds } as any));
         }
         if(trackIds){
             console.log(trackIds.map(trackIds => ({id: trackIds} as any)));

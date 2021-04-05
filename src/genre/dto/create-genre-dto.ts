@@ -1,6 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class GetAlbumsFilterDto {
+
+export class createGenreDto {
     @IsNotEmpty()
-    search: string;
+    name : string;
 }
