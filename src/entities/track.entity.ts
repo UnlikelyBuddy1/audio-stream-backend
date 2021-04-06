@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { Album } from "./album.entity";
+import { Artist } from "./artist.entity";
 import { Playlist } from "./playlist.entity";
 
 @Entity()
@@ -16,5 +17,13 @@ export class Track extends BaseEntity {
     @ManyToMany( () => Playlist)
     @JoinTable()
     playlists : Playlist[];
+
+    @ManyToMany( () => Artist)
+    @JoinTable()
+    artists : Artist[];
+
+    @ManyToMany( () => Album)
+    @JoinTable()
+    albums : Album[];
 
 }

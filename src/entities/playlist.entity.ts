@@ -14,6 +14,9 @@ export class Playlist extends BaseEntity {
     @ManyToOne(type => User, user => user.playlists)
     user : User; 
 
+    @Column()
+    userId: number;
+    
     @ManyToMany( () => Track)
     @JoinTable()
     tracks : Track[];
