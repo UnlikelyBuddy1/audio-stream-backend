@@ -42,4 +42,16 @@ export class PlaylistRepository extends Repository<Playlist> {
         //delete playlist.user;
         return playlist;
     }
+
+    async getAllPlaylists(user: User): Promise<Playlist[]> {
+        const query = this.createQueryBuilder('playlist');
+        try {
+            query.where('playlist.userId = :userId', { userId: user.id });
+            const playlists = await query.getMany();
+            console.log(playlists);
+            return playlists;
+        } catch(err){
+            throw new InternalServerErrorException(err);
+        }
+    }
 }

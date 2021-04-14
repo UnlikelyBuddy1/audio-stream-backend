@@ -1,6 +1,6 @@
-import { IsNotEmpty } from 'class-validator';
+import { Optional } from '@nestjs/common';
 
 export class GetPlaylistsFilterDto {
-    @IsNotEmpty()
+    @Optional()
     search: string;
 }

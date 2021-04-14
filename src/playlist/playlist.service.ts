@@ -35,4 +35,10 @@ export class PlaylistService {
             throw new NotFoundException(`Playlist with ID "${id}" not found`);
         }
     }
+
+    async getAllPlaylists( user: User): Promise<Playlist[]>  {
+        return this.playlistRepository.getAllPlaylists(user);
+    }
+       
+
 }

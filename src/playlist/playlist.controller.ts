@@ -26,11 +26,17 @@ export class PlaylistController {
 
     @Get()
     getPlaylists(@Query(ValidationPipe) filterDto: GetPlaylistsFilterDto, @GetUser() user: User): Promise<Playlist[]>  {
-        return this.playlistService.getPlaylists(filterDto, user);
+        if (filterDto.search){
+            return this.playlistService.getPlaylists(filterDto, user);
+        }
+        else {
+            return this.playlistService.getAllPlaylists(user);
+        }
+            
     }
 
     @Delete('/:id')
-    deletePlaylist(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
+    deletePlaylists(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
         return this.playlistService.deletePlaylist(id, user);
     }
 }
