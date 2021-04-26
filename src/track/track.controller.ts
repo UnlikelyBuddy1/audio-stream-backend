@@ -15,14 +15,15 @@ export class TrackController {
 
     @Get('/:id')
     getTrackById(@Param('id', ParseIntPipe) id : number, @GetUser() user: User): Promise<Track>{
+        console.log("reçu requete")
         return this.trackService.getTrackById(id, user);
     }
 
     @Post()
     @UsePipes(ValidationPipe)
     createTrack(@Body() createTrackDto: createTrackDto, @GetUser() user: User): Promise<Track>{
+        console.log("someone posted a song")
         return this.trackService.createTrack(createTrackDto, user);
-
     }
 
 
