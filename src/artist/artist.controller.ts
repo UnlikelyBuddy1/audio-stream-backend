@@ -11,7 +11,7 @@ export class ArtistController {
     constructor(private artistService: ArtistService){}
 
     @Post()
-    @UsePipes(ValidationPipe)
+    //@UsePipes(ValidationPipe)
     createArtist(@Body() createArtistDto: createArtistDto, @GetUser() user: User): Promise<Artist>{
         return this.artistService.createArtist(createArtistDto, user);
 

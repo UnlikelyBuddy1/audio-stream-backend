@@ -8,7 +8,7 @@ import { createGenreDto } from './dto/create-genre-dto';
 import { GetGenresFilterDto } from './dto/get-genre-filter.dto';
 
 @Controller('genre')
-@UseGuards(AuthGuard())
+//@UseGuards(AuthGuard())
 export class GenreController {
     constructor(private genreService: GenreService){}
 

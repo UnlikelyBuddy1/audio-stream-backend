@@ -9,6 +9,7 @@ import { TrackService } from './track.service';
 
 
 @Controller('track')
+//@UseGuards(AuthGuard())
 export class TrackController {
     constructor(private trackService: TrackService){}
 
