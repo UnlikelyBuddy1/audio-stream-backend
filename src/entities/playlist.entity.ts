@@ -1,4 +1,3 @@
-
 import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Track } from "./track.entity";
 import { User } from "./user.entity";
