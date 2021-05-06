@@ -25,8 +25,6 @@ export class TrackRepository extends Repository<Track> {
         } catch(err){
             throw new InternalServerErrorException(err);
         }
-
-
     }
 
     async createTrack(createTrackDto: createTrackDto, user: User): Promise<Track> {
@@ -43,7 +41,7 @@ export class TrackRepository extends Repository<Track> {
     async likeTrack(likeTrackDto: likeTrackDto, user: User){
         const {trackId, liked} = likeTrackDto;
         if(liked==='0'){
-
+            user.likedTracks.push(trackId);
         }
         else {
             user.likedTracks.push(trackId);
