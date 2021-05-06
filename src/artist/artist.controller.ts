@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { Artist } from 'src/entities/artist.entity';
 import { User } from 'src/entities/user.entity';
@@ -7,6 +8,7 @@ import { createArtistDto } from './dto/create-artist-dto';
 import { GetArtistsFilterDto } from './dto/get-artists-filter.dto';
 
 @Controller('artist')
+@UseGuards(AuthGuard())
 export class ArtistController {
     constructor(private artistService: ArtistService){}
 

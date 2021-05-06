@@ -8,7 +8,7 @@ import { createAlbumDto } from './dto/create-album-dto';
 import { GetAlbumsFilterDto } from './dto/get-albums-filter.dto';
 
 @Controller('album')
-//@UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 export class AlbumController {
     constructor(private albumService: AlbumService){}
 

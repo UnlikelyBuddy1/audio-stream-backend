@@ -1,9 +1,11 @@
 import { InternalServerErrorException } from "@nestjs/common";
+import { isBooleanString } from "class-validator";
 import { Track } from "src/entities/track.entity";
 import { User } from "src/entities/user.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { createTrackDto } from "./dto/create-track.dto";
 import { GetTracksFilterDto } from "./dto/get-tracks-filter.dto";
+import { likeTrackDto } from "./dto/like-track.dto";
 
 @EntityRepository(Track)
 export class TrackRepository extends Repository<Track> {
@@ -36,5 +38,17 @@ export class TrackRepository extends Repository<Track> {
         await track.save();
         //delete track.user;
         return track;
+    }
+
+    async likeTrack(likeTrackDto: likeTrackDto, user: User){
+        const {trackId, liked} = likeTrackDto;
+        if(liked==='0'){
+
+        }
+        else {
+            user.likedTracks.push(trackId);
+            await user.save();
+        }
+        
     }
 }
