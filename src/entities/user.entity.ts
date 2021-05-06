@@ -18,9 +18,9 @@ export class User extends BaseEntity {
     @Column()
     salt: string;
 
-    @Column()
+    /*@Column()
     likedTracks: string[]; // containes list of liked TrackIds
-
+    */
     @OneToMany(type => Playlist, playlist => playlist.user)
     playlists: Playlist[];
 
