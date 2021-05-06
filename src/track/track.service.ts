@@ -4,6 +4,7 @@ import { Track } from 'src/entities/track.entity';
 import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
 import { GetTracksFilterDto } from './dto/get-tracks-filter.dto'
+import { likeTrackDto } from './dto/like-track.dto';
 import { TrackRepository } from './track.repository';
 
 @Injectable()
@@ -32,12 +33,8 @@ export class TrackService {
         }
     }
 
-    async updateTrack(id: number, title : string, path: string, user: User): Promise<Track> {
-        const track = await this.getTrackById(id, user);
-        track.title = title;
-        track.path = path;
-        await track.save();
-        return track;
+    async likeTrack(likeTrackDto: likeTrackDto, user: User) {
+        return this.trackRepository.likeTrack(likeTrackDto, user);
     }
 
     async getTracks(filterDto: GetTracksFilterDto, user: User): Promise<Track[]> {
