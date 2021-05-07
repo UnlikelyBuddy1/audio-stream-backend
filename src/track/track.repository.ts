@@ -5,7 +5,6 @@ import { User } from "src/entities/user.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { createTrackDto } from "./dto/create-track.dto";
 import { GetTracksFilterDto } from "./dto/get-tracks-filter.dto";
-import { likeTrackDto } from "./dto/like-track.dto";
 
 @EntityRepository(Track)
 export class TrackRepository extends Repository<Track> {
