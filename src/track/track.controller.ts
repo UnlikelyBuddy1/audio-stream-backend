@@ -33,7 +33,7 @@ export class TrackController {
         return this.trackService.deleteTrack(id, user);
     }
 /*
-    @Patch('/:id/:liked')
+    @Patch('/:id/')
     updateTrack (@Body() likeTrackDto: likeTrackDto, @GetUser() user: User){
         return this.trackService.likeTrack(likeTrackDto, user);
     }
