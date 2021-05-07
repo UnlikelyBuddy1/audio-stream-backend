@@ -5,7 +5,6 @@ import { Track } from 'src/entities/track.entity';
 import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
 import { GetTracksFilterDto } from './dto/get-tracks-filter.dto';
-import { likeTrackDto } from './dto/like-track.dto';
 import { TrackService } from './track.service';
 
 
@@ -32,12 +31,7 @@ export class TrackController {
     deleteTrack(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
         return this.trackService.deleteTrack(id, user);
     }
-/*
-    @Patch('/:id/')
-    updateTrack (@Body() likeTrackDto: likeTrackDto, @GetUser() user: User){
-        return this.trackService.likeTrack(likeTrackDto, user);
-    }
-*/
+    
     @Get()
     getTracks(@Query(ValidationPipe) filterDto: GetTracksFilterDto, @GetUser() user: User): Promise<Track[]>  {
         return this.trackService.getTracks(filterDto, user);
