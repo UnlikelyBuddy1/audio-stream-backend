@@ -37,7 +37,7 @@ export class TrackRepository extends Repository<Track> {
         //delete track.user;
         return track;
     }
-/*
+
     async likeTrack(likeTrackDto: likeTrackDto, user: User){
         const {trackId, liked} = likeTrackDto;
         if(liked==='0'){
@@ -48,5 +48,5 @@ export class TrackRepository extends Repository<Track> {
             await user.save();
         }
         
-    }*/
+    }
 }

@@ -32,11 +32,11 @@ export class TrackService {
             throw new NotFoundException(`Track with ID "${id}" not found`);
         }
     }
-/*
+
     async likeTrack(likeTrackDto: likeTrackDto, user: User) {
         return this.trackRepository.likeTrack(likeTrackDto, user);
     }
-*/
+
     async getTracks(filterDto: GetTracksFilterDto, user: User): Promise<Track[]> {
         return this.trackRepository.getTracks(filterDto, user);
     }
