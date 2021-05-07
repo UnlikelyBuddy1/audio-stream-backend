@@ -32,12 +32,12 @@ export class TrackController {
     deleteTrack(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
         return this.trackService.deleteTrack(id, user);
     }
-
-    @Patch('/:id')
+/*
+    @Patch('/:id/:liked')
     updateTrack (@Body() likeTrackDto: likeTrackDto, @GetUser() user: User){
         return this.trackService.likeTrack(likeTrackDto, user);
     }
-
+*/
     @Get()
     getTracks(@Query(ValidationPipe) filterDto: GetTracksFilterDto, @GetUser() user: User): Promise<Track[]>  {
         return this.trackService.getTracks(filterDto, user);
