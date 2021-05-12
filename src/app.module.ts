@@ -10,7 +10,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PlaylistModule } from './playlist/playlist.module';
 import { StreamController } from './stream/stream.controller';
-import { StreamService } from './stream/stream.service';
 import { StreamModule } from './stream/stream.module';
 
 @Module({
@@ -26,6 +25,6 @@ import { StreamModule } from './stream/stream.module';
     StreamModule,
   ],
   controllers: [AppController, StreamController],
-  providers: [AppService, StreamService],
+  providers: [AppService],
 })
 export class AppModule {}
