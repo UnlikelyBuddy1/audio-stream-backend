@@ -34,9 +34,11 @@ export class TrackController {
         }),
       )
     createTrack(@Body() createTrackDto: createTrackDto, @GetUser() user: User, @UploadedFile() file: Express.Multer.File): Promise<Track>{
-        if(createTrackDto.path || file){
+        if(!createTrackDto.path && !file){
             throw new InternalServerErrorException('Must specify a path or upload a file')
         }
+        console.log("there's something happening here");
+
         return this.trackService.createTrack(createTrackDto, user, file.filename);
     }
 
