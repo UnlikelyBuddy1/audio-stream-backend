@@ -4,7 +4,6 @@ import { Track } from 'src/entities/track.entity';
 import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
 import { GetTracksFilterDto } from './dto/get-tracks-filter.dto'
-import { likeTrackDto } from './dto/like-track.dto';
 import { TrackRepository } from './track.repository';
 
 @Injectable()
@@ -22,8 +21,8 @@ export class TrackService {
         return found;
     }
 
-    async createTrack(createTrackDto: createTrackDto, user: User): Promise<Track> {
-        return this.trackRepository.createTrack(createTrackDto, user);
+    async createTrack(createTrackDto: createTrackDto, user: User, filename: string): Promise<Track> {
+        return this.trackRepository.createTrack(createTrackDto, user, filename);
     }
 
     async deleteTrack(id: number, user: User): Promise<void> {
@@ -31,10 +30,6 @@ export class TrackService {
         if(result.affected===0) {
             throw new NotFoundException(`Track with ID "${id}" not found`);
         }
-    }
-
-    async likeTrack(likeTrackDto: likeTrackDto, user: User) {
-        return this.trackRepository.likeTrack(likeTrackDto, user);
     }
 
     async getTracks(filterDto: GetTracksFilterDto, user: User): Promise<Track[]> {

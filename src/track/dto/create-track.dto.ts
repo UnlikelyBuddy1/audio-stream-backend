@@ -4,6 +4,6 @@ export class createTrackDto {
     @IsNotEmpty()
     title : string;
 
-    @IsNotEmpty()
+    @IsOptional()
     path :string;
 }

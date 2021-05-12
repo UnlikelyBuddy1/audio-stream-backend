@@ -1,9 +1,7 @@
-import { IsBooleanString, IsNotEmpty} from 'class-validator';
+import { IsBoolean, IsNotEmpty } from 'class-validator';
 
 export class likeTrackDto {
     @IsNotEmpty()
-    trackId : string;
-
-    @IsBooleanString()
-    liked :string;
+    @IsBoolean()
+    liked: number;
 }

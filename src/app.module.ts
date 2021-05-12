@@ -9,6 +9,9 @@ import { GenreModule } from './genre/genre.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PlaylistModule } from './playlist/playlist.module';
+import { StreamController } from './stream/stream.controller';
+import { StreamService } from './stream/stream.service';
+import { StreamModule } from './stream/stream.module';
 
 @Module({
   imports: [
@@ -20,8 +23,9 @@ import { PlaylistModule } from './playlist/playlist.module';
     GenreModule,
     AppModule,
     PlaylistModule,
+    StreamModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, StreamController],
+  providers: [AppService, StreamService],
 })
 export class AppModule {}
