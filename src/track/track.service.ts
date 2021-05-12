@@ -21,8 +21,8 @@ export class TrackService {
         return found;
     }
 
-    async createTrack(createTrackDto: createTrackDto, user: User): Promise<Track> {
-        return this.trackRepository.createTrack(createTrackDto, user);
+    async createTrack(createTrackDto: createTrackDto, user: User, filename: string): Promise<Track> {
+        return this.trackRepository.createTrack(createTrackDto, user, filename);
     }
 
     async deleteTrack(id: number, user: User): Promise<void> {

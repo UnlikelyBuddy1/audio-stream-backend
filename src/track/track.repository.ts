@@ -26,26 +26,14 @@ export class TrackRepository extends Repository<Track> {
         }
     }
 
-    async createTrack(createTrackDto: createTrackDto, user: User): Promise<Track> {
+    async createTrack(createTrackDto: createTrackDto, user: User, filename: string): Promise<Track> {
         const { title, path } = createTrackDto;
         const track = new Track();
         track.title = title;
-        track.path = path;
+        track.path = path ? path: filename;
         //track.user = user;
         await track.save();
         //delete track.user;
         return track;
     }
-/*
-    async likeTrack(likeTrackDto: likeTrackDto, user: User){
-        const {trackId, liked} = likeTrackDto;
-        if(liked==='0'){
-            user.likedTracks.push(trackId);
-        }
-        else {
-            user.likedTracks.push(trackId);
-            await user.save();
-        }
-        
-    }*/
 }
