@@ -38,6 +38,7 @@ export class TrackController {
             throw new InternalServerErrorException('Must specify a path or upload a file')
         }
         console.log("there's something happening here");
+
         return this.trackService.createTrack(createTrackDto, user, file.filename);
     }
 

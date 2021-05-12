@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
                 private userRepository: UserRepository,) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: process.env.JWT_SECRET || config.get('jwt.secret'),
+            secretOrKey: "WayTooMuchSunScreen",
         })
     }
     async validate(payload: JwtPayload) {
