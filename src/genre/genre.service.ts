@@ -5,6 +5,7 @@ import { GenreRepository } from './genre.repository';
 import { createGenreDto } from './dto/create-genre-dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { GetGenresFilterDto } from './dto/get-genre-filter.dto';
+import { modifyGenreDto } from './dto/modify-genre-dto';
 
 @Injectable()
 export class GenreService {
@@ -34,5 +35,10 @@ export class GenreService {
         if(result.affected===0) {
             throw new NotFoundException(`Genre with ID "${id}" not found`);
         }
+    }
+
+    async modifyGenre(id: number, user: User, modifyGenreDto: modifyGenreDto): Promise<Genre>{
+        let genre=await this.getGenreById(id, user);
+        return this.genreRepository.modifyGenre(genre, modifyGenreDto, user);
     }
 }

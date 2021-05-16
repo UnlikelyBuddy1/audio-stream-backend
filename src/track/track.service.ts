@@ -4,6 +4,7 @@ import { Track } from 'src/entities/track.entity';
 import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
 import { GetTracksFilterDto } from './dto/get-tracks-filter.dto'
+import { modifyTrackDto } from './dto/modify-track-dto';
 import { TrackRepository } from './track.repository';
 
 @Injectable()
@@ -34,6 +35,11 @@ export class TrackService {
 
     async getTracks(filterDto: GetTracksFilterDto, user: User): Promise<Track[]> {
         return this.trackRepository.getTracks(filterDto, user);
+    }
+
+    async modifyTrack(id: number, user: User, modifyTrackDto: modifyTrackDto, filename: string): Promise<Track>{
+        let track=await this.getTrackById(id, user);
+        return this.trackRepository.modifyTrack(track, modifyTrackDto, user, filename);
     }
 }
 

@@ -1,9 +1,6 @@
 import { Optional } from '@nestjs/common';
-import { IsNotEmpty } from 'class-validator';
-
-
-export class createGenreDto {
-    @IsNotEmpty()
+export class modifyGenreDto {
+    @Optional()
     name : string;
 
     @Optional()

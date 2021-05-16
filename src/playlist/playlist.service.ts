@@ -5,6 +5,7 @@ import { PlaylistRepository } from './playlist.repository';
 import { createPlaylistDto } from './dto/create-playlist-dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { GetPlaylistsFilterDto } from './dto/get-playlist-filter.dto';
+import { modifyPlaylistDto } from './dto/modify-playlist-dto';
 
 @Injectable()
 export class PlaylistService {
@@ -40,5 +41,8 @@ export class PlaylistService {
         return this.playlistRepository.getAllPlaylists(user);
     }
        
-
+    async modifyPlaylist(id: number, user: User, modifyPlaylistDto: modifyPlaylistDto): Promise<Playlist>{
+        let playlist=await this.getPlaylistById(id, user);
+        return this.playlistRepository.modifyPlaylist(playlist, modifyPlaylistDto, user);
+    }
 }

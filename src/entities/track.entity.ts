@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Album } from "./album.entity";
 import { Artist } from "./artist.entity";
-import { Playlist } from "./playlist.entity";
+import { Genre } from "./genre.entity";
 
 @Entity()
 export class Track extends BaseEntity {
@@ -14,10 +14,6 @@ export class Track extends BaseEntity {
     @Column()
     path: string;
 
-    @ManyToMany( () => Playlist)
-    @JoinTable()
-    playlists : Playlist[];
-
     @ManyToMany( () => Artist)
     @JoinTable()
     artists : Artist[];
@@ -25,4 +21,8 @@ export class Track extends BaseEntity {
     @ManyToMany( () => Album)
     @JoinTable()
     albums : Album[];
+
+    @ManyToMany( () => Genre)
+    @JoinTable()
+    genres : Genre[];
 }

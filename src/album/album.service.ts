@@ -5,6 +5,7 @@ import { User } from 'src/entities/user.entity';
 import { AlbumRepository } from './album.repository';
 import { createAlbumDto } from './dto/create-album-dto';
 import { GetAlbumsFilterDto } from './dto/get-albums-filter.dto';
+import { modifyAlbumDto } from './dto/modify-album-dto';
 
 @Injectable()
 export class AlbumService {
@@ -34,5 +35,10 @@ export class AlbumService {
         if(result.affected===0) {
             throw new NotFoundException(`Album with ID "${id}" not found`);
         }
+    }
+
+    async modifyAlbum(id: number, user: User, modifyAlbumDto: modifyAlbumDto): Promise<Album>{
+        let album=await this.getAlbumById(id, user);
+        return this.albumRepository.modifyAlbum(album, modifyAlbumDto, user);
     }
 }
