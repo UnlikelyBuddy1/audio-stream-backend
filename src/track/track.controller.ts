@@ -36,7 +36,12 @@ export class TrackController {
     )
     createTrack(@Body() createTrackDto: createTrackDto, @GetUser() user: User, @UploadedFile() file: Express.Multer.File,): Promise<Track>{
         console.log("someone posted a song")
-        return this.trackService.createTrack(createTrackDto, user, file.filename);
+        if(!file){
+          return this.trackService.createTrack(createTrackDto, user, null);
+        } else {
+          return this.trackService.createTrack(createTrackDto, user, file.filename);
+        }
+        
     }
 
 

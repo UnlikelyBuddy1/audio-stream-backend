@@ -26,7 +26,7 @@ export class GenreService {
         return this.genreRepository.createGenre(createGenreDto, user);
     }
 
-    async getGenres(filterDto: GetGenresFilterDto, user: User): Promise<Genre> {
+    async getGenres(filterDto: GetGenresFilterDto, user: User): Promise<Genre[]> {
         return this.genreRepository.getGenres(filterDto, user);
     }
 

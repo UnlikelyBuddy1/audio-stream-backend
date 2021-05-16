@@ -11,15 +11,20 @@ import { modifyPlaylistDto } from "./dto/modify-playlist-dto";
 export class PlaylistRepository extends Repository<Playlist> {
 
     async getPlaylists(filterDto: GetPlaylistsFilterDto, user: User): Promise<Playlist[]> {
-        const {search} = filterDto;
-        const query = this.createQueryBuilder('playlist');
+        let {search, index, size} = filterDto;
+        index=parseInt(index.toString());
+        if(size){size=parseInt(size.toString())}else{size=10;}
+        const toSkip = index*size;
+        const toTake = (index+1)*(size);
+        const query = this.createQueryBuilder('playlist')
         try {
-            query.where('playlist.userId = :userId', { userId: user.id });
+            query.where('playlist.userId like :search', {search: `%${search}%`});
 
             if(search){
+                
                 query.andWhere('playlist.name = :search', {search});
             }
-            const playlists = await query.getMany();
+            const playlists = await query.skip(toSkip).take(toTake).getMany();
             console.log(playlists);
             return playlists;
         } catch(err){

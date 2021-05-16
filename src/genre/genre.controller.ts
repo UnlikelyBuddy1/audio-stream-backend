@@ -26,7 +26,7 @@ export class GenreController {
     }
 
     @Get()
-    getGenres(@Query(ValidationPipe) filterDto: GetGenresFilterDto, @GetUser() user: User): Promise<Genre>  {
+    getGenres(@Query(ValidationPipe) filterDto: GetGenresFilterDto, @GetUser() user: User): Promise<Genre[]>  {
         return this.genreService.getGenres(filterDto, user);
     }
 

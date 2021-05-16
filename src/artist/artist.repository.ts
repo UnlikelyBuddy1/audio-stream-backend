@@ -12,15 +12,20 @@ import { modifyArtistDto } from "./dto/modify-artist-dto";
 export class ArtistRepository extends Repository<Artist> {
 
     async getArtists(filterDto: GetArtistsFilterDto, user: User): Promise<Artist[]> {
-        const {search} = filterDto;
+        let {search, index, size} = filterDto;
+        index=parseInt(index.toString());
+        if(size){size=parseInt(size.toString())}else{size=10;}
+        const toSkip = index*size;
+        const toTake = (index+1)*(size);
         const query = this.createQueryBuilder('artist');
         try {
             //query.where('artist.userId = :userId', { userId: user.id });
 
             if(search){
-                query.where('artist.name = :search', {search});
+                
+                query.where('artist.name like :search', {search: `%${search}%`});
             }
-            const artists = await query.getMany();
+            const artists = await query.skip(toSkip).take(toTake).getMany();
             console.log(artists);
             return artists;
         } catch(err){

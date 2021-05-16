@@ -10,23 +10,26 @@ import { modifyGenreDto } from "./dto/modify-genre-dto";
 @EntityRepository(Genre)
 export class GenreRepository extends Repository<Genre> {
 
-    async getGenres(filterDto: GetGenresFilterDto, user: User): Promise<Genre> {
-        const {search} = filterDto;
+    async getGenres(filterDto: GetGenresFilterDto, user: User): Promise<Genre[]> {
+        let {search, index, size} = filterDto;
+        index=parseInt(index.toString());
+        if(size){size=parseInt(size.toString())}else{size=10;}
+        const toSkip = index*size;
+        const toTake = (index+1)*(size);
         const query = this.createQueryBuilder('genre');
         try {
-            //query.where('genre.userId = :userId', { userId: user.id });
+            query.where('genre.userId like :search', {search: `%${search}%`});
 
             if(search){
-                query.where('genre.name = :search', {search});
+                
+                query.andWhere('genre.name = :search', {search});
             }
-            const genres = await query.getOne();
+            const genres = await query.skip(toSkip).take(toTake).getMany();
             console.log(genres);
             return genres;
         } catch(err){
             throw new InternalServerErrorException(err);
         }
-
-
     }
 
     async createGenre(createGenreDto: createGenreDto, user: User): Promise<Genre> {

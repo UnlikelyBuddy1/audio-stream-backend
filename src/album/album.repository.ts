@@ -11,15 +11,20 @@ import { modifyAlbumDto } from "./dto/modify-album-dto";
 export class AlbumRepository extends Repository<Album> {
 
     async getAlbums(filterDto: GetAlbumsFilterDto, user: User): Promise<Album[]> {
-        const {search} = filterDto;
+        let {search, index, size} = filterDto;
+        index=parseInt(index.toString());
+        if(size){size=parseInt(size.toString())}else{size=10;}
+        const toSkip = index*size;
+        const toTake = (index+1)*(size);
         const query = this.createQueryBuilder('album');
         try {
             //query.where('album.userId = :userId', { userId: user.id });
 
             if(search){
-                query.where('album.name = :search', {search});
+                
+                query.where('album.name like :search', {search: `%${search}%`});
             }
-            const albums = await query.getMany();
+            const albums = await query.skip(toSkip).take(toTake).getMany();
             console.log(albums);
             return albums;
         } catch(err){
