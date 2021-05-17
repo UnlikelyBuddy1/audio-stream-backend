@@ -15,7 +15,7 @@ export class AlbumService {
     ) { }
 
     async getAlbumById(id: number, user : User): Promise<Album>{
-        const found = await this.albumRepository.findOne({where : {id}});
+        const found = await this.albumRepository.findOne({relations: ["tracks", "genres", "artists"],where : {id}});
         if(!found) {
             throw new NotFoundException(`Album with ID "${id}" not found`);
         }

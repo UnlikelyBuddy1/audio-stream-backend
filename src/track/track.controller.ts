@@ -13,7 +13,7 @@ import { TrackService } from './track.service';
 
 
 @Controller('track')
-@UseGuards(AuthGuard())
+//@UseGuards(AuthGuard())
 export class TrackController {
     constructor(private trackService: TrackService){}
 

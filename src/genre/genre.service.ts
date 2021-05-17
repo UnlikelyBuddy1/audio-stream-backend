@@ -15,7 +15,7 @@ export class GenreService {
     ) { }
 
     async getGenreById(id: number, user : User): Promise<Genre>{
-        const found = await this.genreRepository.findOne({where : {id}});
+        const found = await this.genreRepository.findOne({relations: ["albums"], where : {id}});
         if(!found) {
             throw new NotFoundException(`Genre with ID "${id}" not found`);
         }

@@ -20,7 +20,7 @@ export class ArtistService {
     }
 
     async getArtistById(id: number, user : User): Promise<Artist>{
-        const found = await this.artistRepository.findOne({where : {id}});
+        const found = await this.artistRepository.findOne({relations: ["albums"], where : {id}});
         if(!found) {
             throw new NotFoundException(`Artist with ID "${id}" not found`);
         }
