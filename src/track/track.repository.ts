@@ -1,5 +1,5 @@
 import { InternalServerErrorException } from "@nestjs/common";
-import { getArrayIfNeeded } from "src/create-entities.utils";
+import { getArrayIfNeeded } from "src/utils/create-entities.utils";
 import { Track } from "src/entities/track.entity";
 import { User } from "src/entities/user.entity";
 import { EntityRepository, Repository } from "typeorm";
