@@ -1,9 +1,6 @@
 import { Optional } from '@nestjs/common';
-import { IsNotEmpty } from 'class-validator';
-
-
-export class createAlbumDto {
-    @IsNotEmpty()
+export class modifyAlbumDto {
+    @Optional()
     name : string;
 
     @Optional()

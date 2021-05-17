@@ -7,4 +7,7 @@ export class createArtistDto {
 
     @Optional()
     trackIds :number[];
+
+    @Optional()
+    albumIds :number[];
 }

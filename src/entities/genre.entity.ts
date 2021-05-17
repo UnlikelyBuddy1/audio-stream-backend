@@ -1,4 +1,5 @@
 import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Album } from "./album.entity";
 import { Track } from "./track.entity";
 
 @Entity()
@@ -13,4 +14,9 @@ export class Genre extends BaseEntity {
     @ManyToMany( () => Track)
     @JoinTable()
     tracks : Track[];
+
+    @ManyToMany( () => Album)
+    @JoinTable()
+    albums : Album[];
+
 }

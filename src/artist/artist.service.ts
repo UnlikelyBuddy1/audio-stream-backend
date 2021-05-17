@@ -5,6 +5,7 @@ import { User } from 'src/entities/user.entity';
 import { ArtistRepository } from './artist.repository';
 import { createArtistDto } from './dto/create-artist-dto';
 import { GetArtistsFilterDto } from './dto/get-artists-filter.dto';
+import { modifyArtistDto } from './dto/modify-artist-dto';
 
 @Injectable()
 export class ArtistService {
@@ -19,7 +20,7 @@ export class ArtistService {
     }
 
     async getArtistById(id: number, user : User): Promise<Artist>{
-        const found = await this.artistRepository.findOne({where : {id}});
+        const found = await this.artistRepository.findOne({relations: ["albums"], where : {id}});
         if(!found) {
             throw new NotFoundException(`Artist with ID "${id}" not found`);
         }
@@ -35,5 +36,10 @@ export class ArtistService {
         if(result.affected===0) {
             throw new NotFoundException(`Track with ID "${id}" not found`);
         }
+    }
+
+    async modifyArtist(id: number, user: User, modifyArtistDto: modifyArtistDto): Promise<Artist>{
+        let artist=await this.getArtistById(id, user);
+        return this.artistRepository.modifyArtist(artist, modifyArtistDto, user);
     }
 }

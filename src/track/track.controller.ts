@@ -7,12 +7,13 @@ import { Track } from 'src/entities/track.entity';
 import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
 import { GetTracksFilterDto } from './dto/get-tracks-filter.dto';
+import { modifyTrackDto } from './dto/modify-track-dto';
 import { editFileName, imageFileFilter } from './file-upload.utils';
 import { TrackService } from './track.service';
 
 
 @Controller('track')
-@UseGuards(AuthGuard())
+//@UseGuards(AuthGuard())
 export class TrackController {
     constructor(private trackService: TrackService){}
 
@@ -23,7 +24,6 @@ export class TrackController {
     }
 
     @Post()
-    @UseGuards(AuthGuard())
     @UsePipes(ValidationPipe)
     @UseInterceptors(
       FileInterceptor('track', {
@@ -36,7 +36,12 @@ export class TrackController {
     )
     createTrack(@Body() createTrackDto: createTrackDto, @GetUser() user: User, @UploadedFile() file: Express.Multer.File,): Promise<Track>{
         console.log("someone posted a song")
-        return this.trackService.createTrack(createTrackDto, user, file.filename);
+        if(!file){
+          return this.trackService.createTrack(createTrackDto, user, null);
+        } else {
+          return this.trackService.createTrack(createTrackDto, user, file.filename);
+        }
+        
     }
 
 
@@ -48,6 +53,21 @@ export class TrackController {
     @Get()
     getTracks(@Query(ValidationPipe) filterDto: GetTracksFilterDto, @GetUser() user: User): Promise<Track[]>  {
         return this.trackService.getTracks(filterDto, user);
+    }
+
+    @Patch('/:id')
+    @UsePipes(ValidationPipe)
+    @UseInterceptors(
+      FileInterceptor('track', {
+        storage: diskStorage({
+          destination: './files',
+          filename: editFileName,
+        }),
+        fileFilter: imageFileFilter,
+      }),
+    )
+    modifyTrack(@Param('id', ParseIntPipe) id: number, @GetUser() user: User, @Body() modifyTrackDto: modifyTrackDto, file: Express.Multer.File): Promise<Track>{
+        return this.trackService.modifyTrack(id, user, modifyTrackDto, file.filename);
     }
     
 }

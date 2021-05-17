@@ -4,6 +4,7 @@ import { Track } from 'src/entities/track.entity';
 import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
 import { GetTracksFilterDto } from './dto/get-tracks-filter.dto'
+import { modifyTrackDto } from './dto/modify-track-dto';
 import { TrackRepository } from './track.repository';
 
 @Injectable()
@@ -14,7 +15,7 @@ export class TrackService {
     ) { }
 
     async getTrackById(id: number, user : User): Promise<Track>{
-        const found = await this.trackRepository.findOne({relations: ["playlists", "artists", "albums"], where : {id}});
+        const found = await this.trackRepository.findOne({relations: ["artists", "albums"], where : {id}});
         if(!found) {
             throw new NotFoundException(`Track with ID "${id}" not found`);
         }
@@ -34,6 +35,11 @@ export class TrackService {
 
     async getTracks(filterDto: GetTracksFilterDto, user: User): Promise<Track[]> {
         return this.trackRepository.getTracks(filterDto, user);
+    }
+
+    async modifyTrack(id: number, user: User, modifyTrackDto: modifyTrackDto, filename: string): Promise<Track>{
+        let track=await this.getTrackById(id, user);
+        return this.trackRepository.modifyTrack(track, modifyTrackDto, user, filename);
     }
 }
 
