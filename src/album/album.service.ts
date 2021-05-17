@@ -25,7 +25,6 @@ export class AlbumService {
     async createAlbum(createAlbumDto: createAlbumDto, user: User): Promise<Album> {
         return this.albumRepository.createAlbum(createAlbumDto, user);
     }
-
     async getAlbums(filterDto: GetAlbumsFilterDto, user: User): Promise<Album[]> {
         return this.albumRepository.getAlbums(filterDto, user);
     }
