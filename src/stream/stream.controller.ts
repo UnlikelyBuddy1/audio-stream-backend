@@ -13,7 +13,7 @@ export class StreamController {
   
   @Get()
   sendHtml(@Res() res){
-    return res.sendFile('index.html', { root: 'C:/Users/Adri/Desktop/Pweb/code/pweb-back-dev/src/stream/' });
+    return res.sendFile('index.html', { root: './src/stream' });
   }
 
   @Get('/:trackpath')
