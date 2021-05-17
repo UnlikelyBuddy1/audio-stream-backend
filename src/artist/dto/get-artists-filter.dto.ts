@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsNumberString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsNumberString, IsOptional, MaxLength } from 'class-validator';
 
 export class GetArtistsFilterDto {
-    @IsNotEmpty()
+    @IsOptional()
     search: string;
 
     @IsNotEmpty()
@@ -10,5 +10,6 @@ export class GetArtistsFilterDto {
 
     @IsOptional()
     @IsNumberString()
+    @MaxLength(2)
     size: number;
 }

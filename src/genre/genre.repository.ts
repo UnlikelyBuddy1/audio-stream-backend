@@ -15,7 +15,7 @@ export class GenreRepository extends Repository<Genre> {
         index=parseInt(index.toString());
         if(size){size=parseInt(size.toString())}else{size=10;}
         const toSkip = index*size;
-        const toTake = (index+1)*(size);
+        const toTake = size;
         const query = this.createQueryBuilder('genre');
         try {
             query.where('genre.userId like :search', {search: `%${search}%`});

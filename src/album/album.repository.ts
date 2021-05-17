@@ -15,7 +15,7 @@ export class AlbumRepository extends Repository<Album> {
         index=parseInt(index.toString());
         if(size){size=parseInt(size.toString())}else{size=10;}
         const toSkip = index*size;
-        const toTake = (index+1)*(size);
+        const toTake = size;
         const query = this.createQueryBuilder('album');
         try {
             //query.where('album.userId = :userId', { userId: user.id });

@@ -36,10 +36,6 @@ export class PlaylistService {
             throw new NotFoundException(`Playlist with ID "${id}" not found`);
         }
     }
-
-    async getAllPlaylists( user: User): Promise<Playlist[]>  {
-        return this.playlistRepository.getAllPlaylists(user);
-    }
        
     async modifyPlaylist(id: number, user: User, modifyPlaylistDto: modifyPlaylistDto): Promise<Playlist>{
         let playlist=await this.getPlaylistById(id, user);

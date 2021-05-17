@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumberString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsNumberString, IsOptional, MaxLength } from 'class-validator';
 
 export class GetPlaylistsFilterDto {
     @IsOptional()
@@ -10,5 +10,6 @@ export class GetPlaylistsFilterDto {
 
     @IsOptional()
     @IsNumberString()
+    @MaxLength(2)
     size: number;
 }

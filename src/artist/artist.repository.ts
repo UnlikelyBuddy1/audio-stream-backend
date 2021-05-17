@@ -16,7 +16,7 @@ export class ArtistRepository extends Repository<Artist> {
         index=parseInt(index.toString());
         if(size){size=parseInt(size.toString())}else{size=10;}
         const toSkip = index*size;
-        const toTake = (index+1)*(size);
+        const toTake = size;
         const query = this.createQueryBuilder('artist');
         try {
             //query.where('artist.userId = :userId', { userId: user.id });

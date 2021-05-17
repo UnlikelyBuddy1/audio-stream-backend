@@ -8,13 +8,12 @@ import { GetTracksFilterDto } from "./dto/get-tracks-filter.dto";
 
 @EntityRepository(Track)
 export class TrackRepository extends Repository<Track> {
-
     async getTracks(filterDto: GetTracksFilterDto, user: User): Promise<Track[]> {
         let {search, index, size} = filterDto;
         index=parseInt(index.toString());
         if(size){size=parseInt(size.toString())}else{size=10;}
         const toSkip = index*size;
-        const toTake = (index+1)*(size);
+        const toTake = size;
         const query = this.createQueryBuilder('track');
         try {
             //query.where('track.userId = :userId', { userId: user.id });
@@ -22,7 +21,6 @@ export class TrackRepository extends Repository<Track> {
                 //search.replace(/\s/g, "").toLowerCase;
                 query.where('track.title like :search', {search: `%${search}%`});
             }
-            console.log(toSkip, toTake);
             const tracks = await query.skip(toSkip).take(toTake).getMany();
             return tracks;
         } catch(err){

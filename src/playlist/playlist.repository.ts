@@ -15,17 +15,16 @@ export class PlaylistRepository extends Repository<Playlist> {
         index=parseInt(index.toString());
         if(size){size=parseInt(size.toString())}else{size=10;}
         const toSkip = index*size;
-        const toTake = (index+1)*(size);
-        const query = this.createQueryBuilder('playlist')
+        const toTake = size;
+        const query = this.createQueryBuilder('playlist');
         try {
-            query.where('playlist.userId like :search', {search: `%${search}%`});
-
+            //query.where('playlist.userId = :userId', { userId: user.id });
             if(search){
-                
-                query.andWhere('playlist.name = :search', {search});
+                //search.replace(/\s/g, "").toLowerCase;
+                query.where('playlist.name like :search', {search: `%${search}%`});
             }
+            console.log(toSkip, toTake);
             const playlists = await query.skip(toSkip).take(toTake).getMany();
-            console.log(playlists);
             return playlists;
         } catch(err){
             throw new InternalServerErrorException(err);
@@ -48,18 +47,6 @@ export class PlaylistRepository extends Repository<Playlist> {
         }
         //delete playlist.user;
         return playlist;
-    }
-
-    async getAllPlaylists(user: User): Promise<Playlist[]> {
-        const query = this.createQueryBuilder('playlist');
-        try {
-            query.where('playlist.userId = :userId', { userId: user.id });
-            const playlists = await query.getMany();
-            console.log(playlists);
-            return playlists;
-        } catch(err){
-            throw new InternalServerErrorException(err);
-        }
     }
 
     async modifyPlaylist(playlist: Playlist, modifyPlaylistDto: modifyPlaylistDto, user: User): Promise<Playlist> {

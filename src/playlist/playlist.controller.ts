@@ -27,13 +27,7 @@ export class PlaylistController {
 
     @Get()
     getPlaylists(@Query(ValidationPipe) filterDto: GetPlaylistsFilterDto, @GetUser() user: User): Promise<Playlist[]>  {
-        if (filterDto.search){
-            return this.playlistService.getPlaylists(filterDto, user);
-        }
-        else {
-            return this.playlistService.getAllPlaylists(user);
-        }
-            
+        return this.playlistService.getPlaylists(filterDto, user);
     }
 
     @Delete('/:id')

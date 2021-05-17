@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsNumberString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsNumberString, IsOptional, MaxLength } from 'class-validator';
 
 export class GetAlbumsFilterDto {
-    @IsNotEmpty()
+    @IsOptional()
     search: string;
 
     @IsNotEmpty()
@@ -10,6 +10,7 @@ export class GetAlbumsFilterDto {
 
     @IsOptional()
     @IsNumberString()
+    @MaxLength(2)
     size: number;
 
 }
