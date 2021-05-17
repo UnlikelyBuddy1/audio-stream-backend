@@ -4,7 +4,7 @@ export const streamFileUtils = function(track, res, req) {
     if (!range) {
       res.status(400).send("Requires Range header");
     }
-    const audioPath = "C:/Users/Adri/Desktop/Pweb/code/pweb-back-dev/files/"+track.toString();
+    const audioPath = "./files"+track.toString();
     //console.log(audioPath);
     const audioSize = fs.statSync(audioPath).size;
     //console.log(audioSize);
