@@ -18,7 +18,7 @@ export class GenreRepository extends Repository<Genre> {
         const toTake = size;
         const query = this.createQueryBuilder('genre');
         try {
-            query.where('genre.userId like :search', {search: `%${search}%`});
+            query.where('genre.name like :search', {search: `%${search}%`});
 
             if(search){
                 
