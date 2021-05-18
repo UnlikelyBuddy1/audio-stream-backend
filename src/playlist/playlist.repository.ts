@@ -18,12 +18,11 @@ export class PlaylistRepository extends Repository<Playlist> {
         const toTake = size;
         const query = this.createQueryBuilder('playlist');
         try {
-            //query.where('playlist.userId = :userId', { userId: user.id });
+            query.where('playlist.userId = :userId', { userId: user.id });
             if(search){
                 //search.replace(/\s/g, "").toLowerCase;
                 query.where('playlist.name like :search', {search: `%${search}%`});
             }
-            console.log(toSkip, toTake);
             const playlists = await query.skip(toSkip).take(toTake).getMany();
             return playlists;
         } catch(err){
@@ -36,6 +35,7 @@ export class PlaylistRepository extends Repository<Playlist> {
         const playlist = new Playlist();
         playlist.name = name;
         playlist.userId = user.id;
+        
         if(trackIds){
             trackIds=getArrayIfNeeded(trackIds);
             playlist.tracks = trackIds.map(trackIds => ({id: trackIds} as any));

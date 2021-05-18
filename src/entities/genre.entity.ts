@@ -11,11 +11,11 @@ export class Genre extends BaseEntity {
     @Column()
     name: string;
     
-    @ManyToMany( () => Track)
+    @ManyToMany( () => Track, track => track.genres)
     @JoinTable()
     tracks : Track[];
 
-    @ManyToMany( () => Album)
+    @ManyToMany( () => Album, album => album.genres)
     @JoinTable()
     albums : Album[];
 

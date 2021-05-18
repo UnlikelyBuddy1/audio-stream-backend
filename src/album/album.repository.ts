@@ -25,7 +25,6 @@ export class AlbumRepository extends Repository<Album> {
                 query.where('album.name like :search', {search: `%${search}%`});
             }
             const albums = await query.skip(toSkip).take(toTake).getMany();
-            console.log(albums);
             return albums;
         } catch(err){
             throw new InternalServerErrorException(err);

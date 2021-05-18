@@ -10,11 +10,11 @@ export class Artist extends BaseEntity {
     @Column()
     name: string;
 
-    @ManyToMany( () => Track)
+    @ManyToMany( () => Track, track => track.artists)
     @JoinTable()
     tracks : Track[];
 
-    @ManyToMany( () => Track)
+    @ManyToMany( () => Album, album => album.artists)
     @JoinTable()
     albums : Album[];
 }

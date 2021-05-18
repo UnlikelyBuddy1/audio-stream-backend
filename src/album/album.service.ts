@@ -15,7 +15,7 @@ export class AlbumService {
     ) { }
 
     async getAlbumById(id: number, user : User): Promise<Album>{
-        const found = await this.albumRepository.findOne({relations: ["tracks", "genres", "artists"],where : {id}});
+        const found = await this.albumRepository.findOne({where : {id}});
         if(!found) {
             throw new NotFoundException(`Album with ID "${id}" not found`);
         }
@@ -25,7 +25,6 @@ export class AlbumService {
     async createAlbum(createAlbumDto: createAlbumDto, user: User): Promise<Album> {
         return this.albumRepository.createAlbum(createAlbumDto, user);
     }
-
     async getAlbums(filterDto: GetAlbumsFilterDto, user: User): Promise<Album[]> {
         return this.albumRepository.getAlbums(filterDto, user);
     }

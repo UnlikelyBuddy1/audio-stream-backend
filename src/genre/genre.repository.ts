@@ -25,7 +25,6 @@ export class GenreRepository extends Repository<Genre> {
                 query.andWhere('genre.name = :search', {search});
             }
             const genres = await query.skip(toSkip).take(toTake).getMany();
-            console.log(genres);
             return genres;
         } catch(err){
             throw new InternalServerErrorException(err);
