@@ -15,9 +15,9 @@ export class Album extends BaseEntity {
     @JoinTable()
     tracks : Track[];
 
-    @ManyToMany( () => Artist, artist => artist.albums)
+    @ManyToMany( () => Artist, artist => artist.albums, {eager: true})
     artists : Artist[];
 
-    @ManyToMany( () => Genre, genre => genre.albums)
+    @ManyToMany( () => Genre, genre => genre.albums, {eager: true})
     genres : Genre[];
 }

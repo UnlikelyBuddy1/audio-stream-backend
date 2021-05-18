@@ -15,7 +15,7 @@ export class TrackService {
     ) { }
 
     async getTrackById(id: number, user : User): Promise<Track>{
-        const found = await this.trackRepository.findOne({relations: ["artists", "albums"], where : {id}});
+        const found = await this.trackRepository.findOne({where : {id}});
         if(!found) {
             throw new NotFoundException(`Track with ID "${id}" not found`);
         }

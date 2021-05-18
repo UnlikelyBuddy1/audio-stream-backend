@@ -14,12 +14,12 @@ export class Track extends BaseEntity {
     @Column()
     path: string;
 
-    @ManyToMany( () => Artist, artist => artist.tracks)
+    @ManyToMany( () => Artist, artist => artist.tracks, {eager: true})
     artists : Artist[];
 
-    @ManyToMany( () => Album, album => album.tracks)
+    @ManyToMany( () => Album, album => album.tracks, {eager: true})
     albums : Album[];
 
-    @ManyToMany( () => Genre, genre => genre.tracks)
+    @ManyToMany( () => Genre, genre => genre.tracks, {eager: true})
     genres : Genre[];
 }
