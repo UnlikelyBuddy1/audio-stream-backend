@@ -19,7 +19,6 @@ export class TrackController {
 
     @Get('/:id')
     getTrackById(@Param('id', ParseIntPipe) id : number, @GetUser() user: User): Promise<Track>{
-        console.log("reçu requete")
         return this.trackService.getTrackById(id, user);
     }
 
@@ -35,7 +34,6 @@ export class TrackController {
       }),
     )
     createTrack(@Body() createTrackDto: createTrackDto, @GetUser() user: User, @UploadedFile() file: Express.Multer.File,): Promise<Track>{
-        console.log("someone posted a song")
         if(!file){
           return this.trackService.createTrack(createTrackDto, user, null);
         } else {

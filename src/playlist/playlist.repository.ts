@@ -23,9 +23,7 @@ export class PlaylistRepository extends Repository<Playlist> {
                 //search.replace(/\s/g, "").toLowerCase;
                 query.where('playlist.name like :search', {search: `%${search}%`});
             }
-            console.log(toSkip, toTake);
             const playlists = await query.skip(toSkip).take(toTake).getMany();
-            console.log(playlists);
             return playlists;
         } catch(err){
             throw new InternalServerErrorException(err);
@@ -36,9 +34,6 @@ export class PlaylistRepository extends Repository<Playlist> {
         let { name, trackIds } = createPlaylistDto;
         const playlist = new Playlist();
         playlist.name = name;
-        if(user){
-            console.log("je suis là");
-        }
         playlist.userId = user.id;
         
         if(trackIds){
