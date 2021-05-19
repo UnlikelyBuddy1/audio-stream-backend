@@ -8,12 +8,12 @@ import { User } from 'src/entities/user.entity';
 import { createTrackDto } from './dto/create-track.dto';
 import { GetTracksFilterDto } from './dto/get-tracks-filter.dto';
 import { modifyTrackDto } from './dto/modify-track-dto';
-import { editFileName, imageFileFilter } from './file-upload.utils';
+import { editFileName, imageFileFilter } from '../utils/file-upload.utils';
 import { TrackService } from './track.service';
 
 
 @Controller('track')
-//@UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 export class TrackController {
     constructor(private trackService: TrackService){}
 
