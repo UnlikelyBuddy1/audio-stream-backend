@@ -15,7 +15,8 @@ export const imageFileFilter = (req, file, callback) => {
 };
 
 export const editFileName = (req, file, callback) => {
-  const name = file.originalname.normalize().split('.')[0];
+  let name = file.originalname.normalize().split('.')[0];
+  name = name.replace(/\s/g, "");
   const fileExtName = extname(file.originalname);
   const randomName = Array(8)
     .fill(null)
@@ -36,6 +37,7 @@ var path = require('path');
 var fs = require('fs');
 export const decode_base64 = (base64str , filename) =>  {
   var buf = Buffer.from(base64str,'base64');
+  filename.replace(/\s/g, "");
   filename = editImageName(filename);
   fs.writeFile(path.join('./files','/image/',filename), buf, function(error){
     if(error){
