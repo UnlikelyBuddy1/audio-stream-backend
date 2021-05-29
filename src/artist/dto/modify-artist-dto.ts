@@ -1,11 +1,12 @@
-import { Optional } from '@nestjs/common';
+import { IsOptional } from "class-validator";
+
 export class modifyArtistDto {
-    @Optional()
+    @IsOptional()
     name : string;
 
-    @Optional()
+    @IsOptional()
     albumIds :number[];
 
-    @Optional()
+    @IsOptional()
     trackIds: number[];
 }

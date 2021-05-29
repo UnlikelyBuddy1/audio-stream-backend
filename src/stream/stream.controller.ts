@@ -2,13 +2,13 @@ import { Controller, Get, Header, Param, Request, Res, UseGuards } from '@nestjs
 import { AuthGuard } from '@nestjs/passport';
 import { streamFileUtils } from 'src/utils/stream-track.utils';
 @Controller('stream')
-//@UseGuards(AuthGuard())
+@UseGuards(AuthGuard())
 export class StreamController {
   
   @Get('/download/:trackpath')
   @Header('Cache-Control', 'max-age=31536000')
   giveFile(@Param('trackpath') track, @Res() res) { 
-    return res.sendFile(track, { root: './files' });
+    return res.sendFile(track, { root: './files/audio' });
   }
   
   @Get()

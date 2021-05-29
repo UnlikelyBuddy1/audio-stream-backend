@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsOptional} from 'class-validator';
+import {IsOptional} from 'class-validator';
 
 export class createTrackDto {
-    @IsNotEmpty()
+    @IsOptional()
     title : string;
 
     @IsOptional()

@@ -32,7 +32,7 @@ export class TrackRepository extends Repository<Track> {
         let { title, path, genreIds, albumIds, artistIds} = createTrackDto;
         const track = new Track();
         track.title = title;
-        track.path = path ? path: filename;
+        track.path = filename ? filename: path;
         if(genreIds){
             genreIds=getArrayIfNeeded(genreIds);
             track.genres = genreIds.map(genreIds => ({ id: genreIds } as any));
@@ -45,8 +45,11 @@ export class TrackRepository extends Repository<Track> {
             albumIds=getArrayIfNeeded(albumIds);
             track.albums = albumIds.map(albumIds => ({ id: albumIds } as any));
         }
-        //track.user = user;
-        await track.save();
+        try {
+            await track.save();
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
         //delete track.user;
         return track;
     }
@@ -57,7 +60,7 @@ export class TrackRepository extends Repository<Track> {
             track.title = title;
         }
         if(path || filename){
-            track.path = path ? path: filename;
+            track.path = filename ? filename: path;
         }
         if(genreIds){
             genreIds=getArrayIfNeeded(genreIds);

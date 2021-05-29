@@ -22,8 +22,8 @@ export class AlbumService {
         return found;
     }
 
-    async createAlbum(createAlbumDto: createAlbumDto, user: User): Promise<Album> {
-        return this.albumRepository.createAlbum(createAlbumDto, user);
+    async createAlbum(createAlbumDto: createAlbumDto, user: User, filename: string): Promise<Album> {
+        return this.albumRepository.createAlbum(createAlbumDto, user, filename);
     }
     async getAlbums(filterDto: GetAlbumsFilterDto, user: User): Promise<Album[]> {
         return this.albumRepository.getAlbums(filterDto, user);
@@ -36,8 +36,8 @@ export class AlbumService {
         }
     }
 
-    async modifyAlbum(id: number, user: User, modifyAlbumDto: modifyAlbumDto): Promise<Album>{
+    async modifyAlbum(id: number, user: User, modifyAlbumDto: modifyAlbumDto, filename: string): Promise<Album>{
         let album=await this.getAlbumById(id, user);
-        return this.albumRepository.modifyAlbum(album, modifyAlbumDto, user);
+        return this.albumRepository.modifyAlbum(album, modifyAlbumDto, user, filename);
     }
 }

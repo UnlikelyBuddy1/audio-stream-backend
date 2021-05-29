@@ -1,10 +1,11 @@
-import { Optional } from '@nestjs/common';
+import { IsOptional } from "class-validator";
+
 
 
 export class modifyPlaylistDto {
-    @Optional()
+    @IsOptional()
     name : string;
 
-    @Optional()
+    @IsOptional()
     trackIds :number[];
 }

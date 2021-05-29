@@ -1,8 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Header, Param, ParseIntPipe, Patch, Post, Query, Res, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { Album } from 'src/entities/album.entity';
 import { User } from 'src/entities/user.entity';
+import { editFileName, imageFileFilter } from 'src/utils/file-upload.utils';
 import { AlbumService } from './album.service';
 import { createAlbumDto } from './dto/create-album-dto';
 import { GetAlbumsFilterDto } from './dto/get-albums-filter.dto';
@@ -18,11 +21,29 @@ export class AlbumController {
         return this.albumService.getAlbumById(id, user);
     }
 
+    @Get('/cover/:coverpath')
+    @Header('Cache-Control', 'max-age=31536000')
+    giveFile(@Param('coverpath') track, @Res() res) { 
+        return res.sendFile(track, { root: './files/image'});
+    }
+
     @Post()
     @UsePipes(ValidationPipe)
-    createAlbum(@Body() createAlbumDto: createAlbumDto, @GetUser() user: User): Promise<Album>{
-        return this.albumService.createAlbum(createAlbumDto, user);
-
+    @UseInterceptors(
+      FileInterceptor('cover', {
+        storage: diskStorage({
+          destination: './files/image',
+          filename: editFileName,
+        }),
+        fileFilter: imageFileFilter,
+      }),
+    )
+    createTrack(@Body() createAlbumDto: createAlbumDto, @GetUser() user: User, @UploadedFile() file: Express.Multer.File,): Promise<Album>{
+        if(!file){
+            return this.albumService.createAlbum(createAlbumDto, user, null);
+        } else {
+            return this.albumService.createAlbum(createAlbumDto, user, file.filename);
+        }
     }
 
     @Get()
@@ -37,7 +58,20 @@ export class AlbumController {
 
     @Patch('/:id')
     @UsePipes(ValidationPipe)
-    modifyAlbum(@Param('id', ParseIntPipe) id: number, @GetUser() user: User, @Body() modifyAlbumDto: modifyAlbumDto): Promise<Album>{
-        return this.albumService.modifyAlbum(id, user, modifyAlbumDto);
+    @UseInterceptors(
+      FileInterceptor('cover', {
+        storage: diskStorage({
+          destination: './files/image',
+          filename: editFileName,
+        }),
+        fileFilter: imageFileFilter,
+      }),
+    )
+    modifyAlbum(@Param('id', ParseIntPipe) id: number, @GetUser() user: User, @Body() modifyAlbumDto: modifyAlbumDto, file: Express.Multer.File): Promise<Album>{
+        if(file){
+            return this.albumService.modifyAlbum(id, user, modifyAlbumDto, file.filename);
+        } else {
+            return this.albumService.modifyAlbum(id, user, modifyAlbumDto, null);
+        }
     }
 }

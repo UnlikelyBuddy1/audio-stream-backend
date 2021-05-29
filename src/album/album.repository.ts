@@ -6,6 +6,7 @@ import { EntityRepository, Repository } from "typeorm";
 import { createAlbumDto } from "./dto/create-album-dto";
 import { GetAlbumsFilterDto } from "./dto/get-albums-filter.dto";
 import { modifyAlbumDto } from "./dto/modify-album-dto";
+import { defaultImage } from "src/utils/file-upload.utils";
 
 @EntityRepository(Album)
 export class AlbumRepository extends Repository<Album> {
@@ -31,10 +32,11 @@ export class AlbumRepository extends Repository<Album> {
         }
     }
 
-    async createAlbum(createAlbumDto: createAlbumDto, user: User): Promise<Album> {
+    async createAlbum(createAlbumDto: createAlbumDto, user: User, filename: string): Promise<Album> {
         let { name, artistIds, genreIds } = createAlbumDto;
         const album = new Album();
         album.name = name;
+        album.cover = filename ? filename: defaultImage;
         if(genreIds){
             genreIds=getArrayIfNeeded(genreIds);
             album.genres = genreIds.map(genreIds => ({ id: genreIds } as any));
@@ -52,11 +54,14 @@ export class AlbumRepository extends Repository<Album> {
         return album;
     }
 
-    async modifyAlbum(album: Album, modifyAlbumDto: modifyAlbumDto, user: User): Promise<Album>{
+    async modifyAlbum(album: Album, modifyAlbumDto: modifyAlbumDto, user: User, filename: string): Promise<Album>{
         let {name, genreIds, artistIds}= modifyAlbumDto;
         if(name){
             album.name = name;
         } 
+        if(filename){
+            album.cover=filename;
+        }
         if(genreIds){
             genreIds=getArrayIfNeeded(genreIds);
             album.genres = genreIds.map(genreIds => ({ id: genreIds } as any));

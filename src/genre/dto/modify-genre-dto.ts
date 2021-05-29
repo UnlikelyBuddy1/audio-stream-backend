@@ -1,11 +1,12 @@
-import { Optional } from '@nestjs/common';
+import { IsOptional } from "class-validator";
+
 export class modifyGenreDto {
-    @Optional()
+    @IsOptional()
     name : string;
 
-    @Optional()
+    @IsOptional()
     trackIds :number[];
 
-    @Optional()
+    @IsOptional()
     albumIds: number[];
 }
