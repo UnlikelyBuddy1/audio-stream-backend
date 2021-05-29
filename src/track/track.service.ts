@@ -11,7 +11,7 @@ import { TrackRepository } from './track.repository';
 export class TrackService {
     constructor(
         @InjectRepository(TrackRepository)
-        private trackRepository : TrackRepository,
+        private trackRepository : TrackRepository
     ) { }
 
     async getTrackById(id: number, user : User): Promise<Track>{

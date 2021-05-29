@@ -1,13 +1,12 @@
-import { Optional } from '@nestjs/common';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class createArtistDto {
     @IsNotEmpty()
     name : string;
 
-    @Optional()
+    @IsOptional()
     trackIds :number[];
 
-    @Optional()
+    @IsOptional()
     albumIds :number[];
 }
