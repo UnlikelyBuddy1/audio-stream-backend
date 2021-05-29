@@ -11,7 +11,7 @@ export class Album extends BaseEntity {
     @Column()
     name: string;
 
-    @Column()
+    @Column({nullable: true})
     cover: string;
 
     @ManyToMany( () => Track, track => track.albums)
