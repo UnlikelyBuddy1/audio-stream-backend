@@ -2,7 +2,7 @@ import { Controller, Get, Header, Param, Request, Res, UseGuards } from '@nestjs
 import { AuthGuard } from '@nestjs/passport';
 import { streamFileUtils } from 'src/utils/stream-track.utils';
 @Controller('stream')
-@UseGuards(AuthGuard())
+//@UseGuards(AuthGuard())
 export class StreamController {
   
   @Get('/download/:trackpath')
