@@ -5,6 +5,7 @@ import { User } from "src/entities/user.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { createTrackDto } from "./dto/create-track.dto";
 import { GetTracksFilterDto } from "./dto/get-tracks-filter.dto";
+import { modifyTrackDto } from "./dto/modify-track-dto";
 
 @EntityRepository(Track)
 export class TrackRepository extends Repository<Track> {
@@ -29,9 +30,10 @@ export class TrackRepository extends Repository<Track> {
     }
 
     async createTrack(createTrackDto: createTrackDto, user: User, filename: string): Promise<Track> {
-        let { title, path, genreIds, albumIds, artistIds} = createTrackDto;
+        let { title, path, bpm, genreIds, albumIds, artistIds} = createTrackDto;
         const track = new Track();
         track.title = title;
+        track.bpm = bpm;
         track.path = filename ? filename: path;
         if(genreIds){
             genreIds=getArrayIfNeeded(genreIds);
@@ -54,10 +56,13 @@ export class TrackRepository extends Repository<Track> {
         return track;
     }
 
-    async modifyTrack(track: Track, createTrackDto: createTrackDto, user: User, filename: string): Promise<Track> {
-        let { title, path, genreIds, albumIds, artistIds} = createTrackDto;
+    async modifyTrack(track: Track, modifyTrackDto: modifyTrackDto, user: User, filename: string): Promise<Track> {
+        let { title, path, bpm, genreIds, albumIds, artistIds} = modifyTrackDto;
         if(title){
             track.title = title;
+        }
+        if(bpm){
+            track.bpm = bpm;
         }
         if(path || filename){
             track.path = filename ? filename: path;

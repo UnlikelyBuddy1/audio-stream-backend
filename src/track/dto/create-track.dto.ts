@@ -8,6 +8,9 @@ export class createTrackDto {
     path :string;
 
     @IsOptional()
+    bpm :number;
+
+    @IsOptional()
     genreIds: number[];
 
     @IsOptional()
