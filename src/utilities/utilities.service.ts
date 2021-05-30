@@ -31,7 +31,7 @@ export class UtilitiesService {
         let tags= (await mm.parseFile('./files/audio/'+filename)).common;
         title = title ? title: tags.title;
         
-        if(genreIds==null){
+        if(genreIds==null && tags.genre!=null){
             genreIds=[];
             for(let entry of tags.genre){
                 let result = await this.genreRepository.findOne({where: {name: entry}})
@@ -50,7 +50,7 @@ export class UtilitiesService {
             }  
         }
 
-        if(artistIds==null){
+        if(artistIds==null && tags.artist!=null){
             artistIds=[];
             let splitedArtists = tags.artist.split("/");
             for(let entry of splitedArtists){
@@ -70,7 +70,7 @@ export class UtilitiesService {
             }  
         }
 
-        if(albumIds==null){
+        if(albumIds==null && tags.album!=null){
             albumIds=[];
             let result = await this.albumRepository.findOne({where: {name: tags.album}})
             if(result!=null){
