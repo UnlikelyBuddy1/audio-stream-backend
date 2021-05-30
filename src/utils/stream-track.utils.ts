@@ -11,10 +11,9 @@ export const streamFileUtils = function(track, res, req) {
       
     // Parse Range
     // Example: "bytes=32324-"
-    const CHUNK_SIZE = 2*(10 ** 6); // 2MB
+    const CHUNK_SIZE = 1*(10 ** 6); // 1MB
     const start = Number(range.replace(/\D/g, ""));
     const end = Math.min(start + CHUNK_SIZE, audioSize - 1);
-
     // Create headers
     const contentLength = end - start + 1;
     //console.log(contentLength);

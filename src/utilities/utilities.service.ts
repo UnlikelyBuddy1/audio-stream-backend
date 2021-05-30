@@ -27,10 +27,10 @@ export class UtilitiesService {
         private genreRepository : GenreRepository,
     ) { }
     async createTrack(createTrackDto: createTrackDto, user: User, filename: string): Promise<Track> {
-        let { title, path ,genreIds, albumIds, artistIds} = createTrackDto;
+        let {title, path , bpm, genreIds, albumIds, artistIds} = createTrackDto;
         let tags= (await mm.parseFile('./files/audio/'+filename)).common;
         title = title ? title: tags.title;
-        
+        bpm = bpm ? bpm: tags.bpm;
         if(genreIds==null && tags.genre!=null){
             genreIds=[];
             for(let entry of tags.genre){
@@ -96,7 +96,7 @@ export class UtilitiesService {
                 albumIds.push((parseInt(album.id)));  
             }
         }
-        createTrackDto= {title, path ,genreIds, albumIds, artistIds};
+        createTrackDto= {title, path, bpm, genreIds, albumIds, artistIds};
         return this.trackRepository.createTrack(createTrackDto, user, filename);
     }
 }
