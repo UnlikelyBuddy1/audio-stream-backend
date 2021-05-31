@@ -81,7 +81,7 @@ export class UtilitiesService {
                     let imagename=decode_base64(tags.picture[0].data, tags.title);
                     album.cover= imagename;
                 } else {
-                    album.cover= defaultImage[Math.floor(Math.random() * defaultImage.length)];
+                    album.cover= defaultImage;
                 }
                 album.name=tags.album;
                 

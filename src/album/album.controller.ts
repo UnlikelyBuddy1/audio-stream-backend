@@ -23,8 +23,13 @@ export class AlbumController {
 
     @Get('/cover/:coverpath')
     @Header('Cache-Control', 'max-age=31536000')
-    giveFile(@Param('coverpath') track, @Res() res) { 
-        return res.sendFile(track, { root: './files/image'});
+    giveFile(@Param('coverpath') cover, @Res() res) { 
+      if(cover != "defaultApplicationLogo.jpg"){
+        return res.sendFile(cover, { root: './files/image'});
+      } else {
+        const defaults=["earth.jpg", "moon.jpg", "sun.jpg"];
+        return res.sendFile(defaults[Math.floor(Math.random() * defaults.length)], { root: './src/utils/defaultImage'});
+      }
     }
 
     @Post()

@@ -36,7 +36,7 @@ export class AlbumRepository extends Repository<Album> {
         let { name, artistIds, genreIds } = createAlbumDto;
         const album = new Album();
         album.name = name;
-        album.cover = filename ? filename: defaultImage[Math.floor(Math.random() * defaultImage.length)];
+        album.cover = filename ? filename: defaultImage;
         if(genreIds){
             genreIds=getArrayIfNeeded(genreIds);
             album.genres = genreIds.map(genreIds => ({ id: genreIds } as any));
