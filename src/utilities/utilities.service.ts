@@ -10,7 +10,7 @@ import { Genre } from 'src/entities/genre.entity';
 import { Album } from 'src/entities/album.entity';
 import { Artist } from 'src/entities/artist.entity';
 import * as mm from 'music-metadata';
-import { decode_base64 } from 'src/utils/file-upload.utils';
+import { decode_base64, defaultImage } from 'src/utils/file-upload.utils';
 import { getArrayIfNeeded } from 'src/utils/create-entities.utils';
 
 
@@ -77,9 +77,14 @@ export class UtilitiesService {
                 albumIds.push((parseInt(result.id)));
             } else {
                 const album = new Album();
-                let imagename=decode_base64(tags.picture[0].data, tags.title);
+                if(tags.picture[0].data != null){
+                    let imagename=decode_base64(tags.picture[0].data, tags.title);
+                    album.cover= imagename;
+                } else {
+                    album.cover= defaultImage[Math.floor(Math.random() * defaultImage.length)];
+                }
                 album.name=tags.album;
-                album.cover= imagename;
+                
                 if(genreIds){
                     genreIds=getArrayIfNeeded(genreIds);
                     album.genres = genreIds.map(genreIds => ({ id: genreIds } as any));

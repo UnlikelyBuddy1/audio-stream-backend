@@ -30,6 +30,7 @@ function editImageName(filename){
     .fill(null)
     .map(() => Math.round(Math.random() * 16).toString(16))
     .join('');
+    filename=filename.replace(/[/?%*:|"<>]/g, '');
     return (filename+'-'+randomName+".jpg");
 };
 
@@ -49,5 +50,5 @@ export const decode_base64 = (base64str , filename) =>  {
 }
 export const audioFormats = ["mp3", "wav", "ogg"];
 export const imageFormats = ["jpeg", "png", "jpg"];
-export const defaultImage = "./files/image/defaultApplicationLogo.png";
+export const defaultImage = ["./src/utils/defaultImage/earth.jpg","./src/utils/defaultImage/moon.jpg","./src/utils/defaultImage/sun.jpg"]
 
