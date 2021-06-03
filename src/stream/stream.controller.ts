@@ -3,7 +3,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { streamFileUtils } from 'src/utils/stream-track.utils';
 @Controller('stream')
 export class StreamController {
-  @UseGuards(AuthGuard())
   @Get('/download/:trackpath')
   @Header('Cache-Control', 'max-age=31536000')
   giveFile(@Param('trackpath') track, @Res() res) { 
@@ -14,7 +13,7 @@ export class StreamController {
   sendHtml(@Res() res){
     return res.sendFile('index.html', { root: './src/stream' });
   }
-  @UseGuards(AuthGuard())
+
   @Get('/:trackpath')
   streamFile(@Param('trackpath') track, @Res() response, @Request() request) { 
     return streamFileUtils(track, response, request);
