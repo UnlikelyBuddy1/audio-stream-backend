@@ -18,7 +18,7 @@ export class GenreRepository extends Repository<Genre> {
         const query = this.createQueryBuilder('genre');
         try {
             if(search){ 
-                query.where('track.title like :search', {search: `%${search}%`});
+                query.where('genre.name like :search', {search: `%${search}%`});
             }
             const genres = await query.skip(toSkip).take(toTake).getMany();
             return genres;
