@@ -9,7 +9,6 @@ import { modifyGenreDto } from "./dto/modify-genre-dto";
 
 @EntityRepository(Genre)
 export class GenreRepository extends Repository<Genre> {
-
     async getGenres(filterDto: GetGenresFilterDto, user: User): Promise<Genre[]> {
         let {search, index, size} = filterDto;
         index=parseInt(index.toString());
@@ -18,11 +17,8 @@ export class GenreRepository extends Repository<Genre> {
         const toTake = size;
         const query = this.createQueryBuilder('genre');
         try {
-            query.where('genre.name like :search', {search: `%${search}%`});
-
-            if(search){
-                
-                query.andWhere('genre.name = :search', {search});
+            if(search){ 
+                query.where('track.title like :search', {search: `%${search}%`});
             }
             const genres = await query.skip(toSkip).take(toTake).getMany();
             return genres;
