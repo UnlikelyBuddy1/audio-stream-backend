@@ -14,7 +14,7 @@ import { UtilitiesService} from 'src/utilities/utilities.service';
 
 
 @Controller('track')
-@UseGuards(AuthGuard())
+
 export class TrackController {
     constructor(private trackService: TrackService, 
     private utilitiesService: UtilitiesService){}

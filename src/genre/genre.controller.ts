@@ -9,7 +9,7 @@ import { GetGenresFilterDto } from './dto/get-genre-filter.dto';
 import { modifyGenreDto } from './dto/modify-genre-dto';
 
 @Controller('genre')
-@UseGuards(AuthGuard())
+
 export class GenreController {
     constructor(private genreService: GenreService){}
 

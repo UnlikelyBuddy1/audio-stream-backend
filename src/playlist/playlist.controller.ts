@@ -9,7 +9,7 @@ import { GetPlaylistsFilterDto } from './dto/get-playlist-filter.dto';
 import { modifyPlaylistDto } from './dto/modify-playlist-dto';
 
 @Controller('playlist')
-@UseGuards(AuthGuard())
+
 export class PlaylistController {
     constructor(private playlistService: PlaylistService){}
 

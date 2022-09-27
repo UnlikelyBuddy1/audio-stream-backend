@@ -15,7 +15,7 @@ import { modifyAlbumDto } from './dto/modify-album-dto';
 export class AlbumController {
     constructor(private albumService: AlbumService){}
 
-    @UseGuards(AuthGuard())
+    
     @Get('/:id')
     getAlbumById(@Param('id', ParseIntPipe) id : number, @GetUser() user: User): Promise<Album>{
         return this.albumService.getAlbumById(id, user);
@@ -32,7 +32,7 @@ export class AlbumController {
       }
     }
 
-    @UseGuards(AuthGuard())
+    
     @Post()
     @UsePipes(ValidationPipe)
     @UseInterceptors(
@@ -52,19 +52,19 @@ export class AlbumController {
         }
     }
 
-    @UseGuards(AuthGuard())
+    
     @Get()
     getAlbums(@Query(ValidationPipe) filterDto: GetAlbumsFilterDto, @GetUser() user: User): Promise<Album[]>  {
         return this.albumService.getAlbums(filterDto, user);
     }
 
-    @UseGuards(AuthGuard())
+    
     @Delete('/:id')
     deleteAlbum(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
         return this.albumService.deleteAlbum(id, user);
     }
 
-    @UseGuards(AuthGuard())
+    
     @Patch('/:id')
     @UsePipes(ValidationPipe)
     @UseInterceptors(

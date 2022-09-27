@@ -9,7 +9,7 @@ import { GetArtistsFilterDto } from './dto/get-artists-filter.dto';
 import { modifyArtistDto } from './dto/modify-artist-dto';
 
 @Controller('artist')
-//@UseGuards(AuthGuard())
+//
 export class ArtistController {
     constructor(private artistService: ArtistService){}
 

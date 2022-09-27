@@ -5,4 +5,4 @@ db:
   synchronize: true
 
 jwt: 
-  secret: 'topSecret51'
+  secret: 'WayTooMuchSunScreen'

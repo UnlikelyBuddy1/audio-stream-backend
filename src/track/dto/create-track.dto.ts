@@ -18,4 +18,7 @@ export class createTrackDto {
 
     @IsOptional()
     artistIds: number[];
+
+    @IsOptional()
+    cover: string;
 }

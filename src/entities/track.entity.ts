@@ -15,6 +15,9 @@ export class Track extends BaseEntity {
     path: string;
 
     @Column({nullable: true})
+    cover: string;
+
+    @Column({nullable: true})
     bpm: number
 
     @ManyToMany( () => Artist, artist => artist.tracks, {eager: true})

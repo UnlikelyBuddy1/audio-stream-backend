@@ -30,11 +30,12 @@ export class TrackRepository extends Repository<Track> {
     }
 
     async createTrack(createTrackDto: createTrackDto, user: User, filename: string): Promise<Track> {
-        let { title, path, bpm, genreIds, albumIds, artistIds} = createTrackDto;
+        let { title, path, bpm, genreIds, albumIds, artistIds, cover} = createTrackDto;
         const track = new Track();
         track.title = title;
         track.bpm = bpm;
         track.path = filename ? filename: path;
+        track.cover = cover;
         if(genreIds){
             genreIds=getArrayIfNeeded(genreIds);
             track.genres = genreIds.map(genreIds => ({ id: genreIds } as any));
