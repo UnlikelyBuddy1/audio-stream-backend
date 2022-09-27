@@ -61,7 +61,7 @@ http://pweb.tools.asidiras.dev/stream
 - **GET** + *name of song, streams you the song*
 - **GET** *gets you a html file (not usefull for you, just a demo)*
 - 
-http://pweb.tools.asidiras.dev/stream/download/
+http://pweb.tools.asidiras.dev/stream/download/ Not the current url
 - **GET** *+/download/ + name of song Downloads the song*
 
 ## Go and see the DTOs of each entitie to see what you need to send, and also check the controllers for more info
