@@ -20,7 +20,7 @@ export class TrackRepository extends Repository<Track> {
             //query.where('track.userId = :userId', { userId: user.id });
             if(search){
                 //search.replace(/\s/g, "").toLowerCase;
-                query.where('track.title like :search', {search: `%${search}%`});
+                query.where('LOWER(track.title) like LOWER(:search)', {search: `%${search}%`});
             }
             const tracks = await query.skip(toSkip).take(toTake).getMany();
             return tracks;
