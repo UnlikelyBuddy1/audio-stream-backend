@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Interfaces</title>
+    <link rel="stylesheet" href="assets/Kset.css">
+</head>
+<body>
+    <div id="wrapper" class="wrapper">
+        <!-- Left Column -->
+        <div id="left-column" class="left-column hidden">
+            <div id="sidebar" class="sidebar">
+                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo menu-logo">
+                <button id="home" class="sidebarButton" onclick="switchContent('content')">
+                    <img src="assets/home.webp" alt="an icon of a house" class="sidebarIcon">
+                    <b class = "text sidebarText">Home</b>
+                </button>
+                <button id="playlist" class="sidebarButton" onclick="switchContent('playlist-selection')">
+                    <img src="assets/playlist.webp" alt="a playlist" class="sidebarIcon">
+                    <b class = "text sidebarText">PlayLists</b>
+                </button>
+                <button id="new-playlist" class="sidebarButton">
+                    <img src="assets/plus.webp" alt="a plus symbol" class="sidebarIcon">
+                    <b class = "text sidebarText">New Playlist</b>
+                </button>
+                <button onclick="window.open('https://github.com/UnlikelyBuddy1/Kset-uc3m-project')" type="button" class="sidebarButton">
+                    <img src="assets/github.webp" alt="github logo" id="github" class="sidebarIcon">
+                    <b class = "text sidebarText">GitHub</b>
+                </button>
+                <div class="link">
+                    <a href="#" class="text">Privacy</a>
+                    <a href="#" class="text">Cookies</a>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Right Column -->
+        <div id ="right_column" class="right_column">
+            <div class="navbar-wrapper">
+                <div id="navbar" class="navbar"> 
+                    <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo top-logo">
+                    <div class="container" onclick="burger(this)"> 
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div> 
+                    </div>
+                    <div class="search-bar">
+                        <!-- <form role="search"> -->
+                        <input class="text serach-input fade" type="text" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
+                        <!-- </form> -->
+                    </div>
+                    
+                    
+                    <button id="nav-signup" class="button">
+                        <b class="text">SIGN UP</b>
+                    </button> 
+                    <button id="nav-login" class="button">
+                        <b class="text">LOG IN</b>
+                    </button>
+                </div>
+            </div>
+            <div id="main-menu"></div>
+            <div class="spacer"></div>
+            <div id="content" class="content"></div>
+            <div id="playlist-selection" class="playlist-selection hide-floating"></div>
+            <div class="footerspacer"></div>
+            <div id="footer" class="footer">
+                <img id="miniCover" src="" class="miniCover">
+                <div class="bottom">
+                    <audio id="audio" controls>
+                        <source id="source" src="" type="audio/mpeg">
+                    </audio>   
+                    <b id="banner" class="signup-banner text"><a class="signup-banner text accent-color" href=#>Signing up</a> for free</b>                 
+                </div>
+            </div> 
+        </div>
+    </div> 
+    <div id="floating" class="floating">
+        <div id="login" class="sign hide-floating">
+            <img class="sign-img" src="assets/login.webp">
+            <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username">
+            <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password">
+            <button id="button-login" class="text sign-button fade">
+                <b class="text">LOG IN</b>
+            </button>
+        </div>
+        <div id="signup" class="sign hide-floating">
+            <img class="sign-img" src="assets/login.webp">
+            <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username">
+            <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special">
+            <input type="text" class="text sign-inputs fade" placeholder="name">
+            <input type="text" class="text sign-inputs fade" placeholder="email">
+            <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx">
+            <a href="#" class="text">Terms of use</a>
+            <button id="button-signup" class="text sign-button fade">
+                <b class="text">SIGN UP</b>
+            </button>
+        </div>
+        <div id="create-playlist" class="sign hide-floating">
+            <img class="sign-img" src="assets/plus.webp">
+            <input type="text" class="text sign-inputs fade" placeholder="Playlist Name">
+            <button id="button-playlist" class="text sign-button fade">
+                <b class="text">Create Playlist</b>
+            </button>
+        </div>
+    </div>
+</body>
+</html> 
+<script src="assets/page.js"></script>
