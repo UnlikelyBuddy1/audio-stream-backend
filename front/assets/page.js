@@ -273,8 +273,10 @@ function login(username='', password=''){
       setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
       setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
     }
-    response.json().then((value)=> {
-      setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7, SameSite: 'None'});
+    response.json().then((value)=>{
+      if(getCookie('bearer')){
+        setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7, SameSite: 'None'});
+      }
     });
   }})}
 function switchContent(div) {
