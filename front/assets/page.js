@@ -267,10 +267,14 @@ function login(username='', password=''){
   }).then((response) => {if(response.status == 201){
     fill();
     document.getElementById('banner').style = 'display: none';
-    setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
-    setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+    const cookieUsername = getCookie('username');
+    const cookiePassword = getCookie('password');
+    if(!(cookieUsername && cookiePassword)){
+      setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+      setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+    }
     response.json().then((value)=> {
-      setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7});
+      setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7, SameSite: 'None'});
     });
   }})}
 function switchContent(div) {
