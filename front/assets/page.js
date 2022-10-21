@@ -258,6 +258,7 @@ function login(username='', password=''){
   const cookieUsername = getCookie('username');
   const cookiePassword = getCookie('password');
   const data = {username: username?username:cookieUsername, password: password?password:cookiePassword};
+  console.log(cookieUsername, cookiePassword);
   fetch('https://kset.home.asidiras.dev/auth/signin', 
   {
     method: 'POST', 
