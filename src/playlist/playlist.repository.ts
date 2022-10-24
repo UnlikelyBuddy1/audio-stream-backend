@@ -6,7 +6,6 @@ import { EntityRepository, Repository } from "typeorm";
 import { createPlaylistDto } from "./dto/create-playlist-dto";
 import { GetPlaylistsFilterDto } from "./dto/get-playlist-filter.dto";
 import { modifyPlaylistDto } from "./dto/modify-playlist-dto";
-
 @EntityRepository(Playlist)
 export class PlaylistRepository extends Repository<Playlist> {
 
@@ -21,7 +20,7 @@ export class PlaylistRepository extends Repository<Playlist> {
             query.where('playlist.userId = :userId', { userId: user.id });
             if(search){
                 //search.replace(/\s/g, "").toLowerCase;
-                query.where('playlist.name like :search', {search: `%${search}%`});
+                query.andWhere('playlist.name like :search', {search: `%${search}%`});
             }
             const playlists = await query.skip(toSkip).take(toTake).getMany();
             return playlists;
@@ -29,7 +28,7 @@ export class PlaylistRepository extends Repository<Playlist> {
             throw new InternalServerErrorException(err);
         }
     }
-
+    
     async createPlaylist(createPlaylistDto: createPlaylistDto, user: User): Promise<Playlist> {
         let { name, trackIds } = createPlaylistDto;
         const playlist = new Playlist();
