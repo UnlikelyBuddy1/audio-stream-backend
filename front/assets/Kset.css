@@ -5,12 +5,24 @@
     margin-bottom: -75%;
     margin-top: 32.5%;
     opacity: 0;
-    pointer-events: none
+    pointer-events: none;
 }
 .play{
     width: 400%;
     filter: invert(1) drop-shadow(2px 6px 4px black);
     pointer-events: none
+}
+.like-wrapper{
+    width: 10%;
+    opacity: 0;
+    height: 0;
+}
+.like{
+    width: 200%;
+    filter: invert(1) drop-shadow(2px 6px 4px black);
+    position: relative;
+    left: 750%;
+    top: 5px;
 }
 .spacer{
     height: 65px;
@@ -48,6 +60,12 @@
     margin-top: 2vh;
     margin-bottom: 3vh;
     object-fit: contain;
+}
+.signup-logo{
+    padding: 0.5em;
+    height: 32px;
+    width: 32px;
+    border-radius: 50px;
 }
 .miniCover{
     height: 50px;
@@ -103,6 +121,22 @@ audio {
         background-color: #0E0C0B;
     }
 }
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+
+    audio {
+        filter: invert(0);
+    }
+}}
+.start-page{
+    padding: 1.2vmax;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    border-radius: 24px;
+    background-color: #1e1e1e;
+    height: 85vh;
+}
 .content{
     padding: 1.2vmax;
     display: flex;
@@ -110,7 +144,7 @@ audio {
     align-items: center;
     justify-content: flex-start;
     border-radius: 24px;
-    background-color: #1e1e1e
+    background-color: #1e1e1e;
 }
 .category{
     display: flex;
@@ -303,6 +337,9 @@ body{
     animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     animation-fill-mode: forwards;
 }
+.track:hover > .like-wrapper {
+    opacity: 1;
+}
 @keyframes show-up {
     from {
         opacity: 0;
@@ -427,7 +464,7 @@ body{
     background: #ee0000a0;
     border-radius: 10px;
 }
-.serach-input{
+.search-input{
     width: 30vw;
     max-width: 400px;
     height: 18px;
@@ -436,6 +473,7 @@ body{
     background-color: #1e1e1e;
     border-radius: 20px;
     padding: 0.3rem;
+    padding-left: 0.5rem;
     outline: none;
 }
 .fade:hover{
@@ -509,6 +547,18 @@ body{
     }
     
 }
+.artist-profile{
+    margin: 2em;
+    margin-bottom: 0.5em;
+    height: 25vh;
+    border-radius: 100%;
+}
+.artist-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .focus{
     animation-name: zoom;
     animation-duration: 500ms;
@@ -530,9 +580,151 @@ body{
 .playlist-selection{
     padding: 1.2vmax;
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
+    flex-flow: column;
     justify-content: flex-start;
     border-radius: 24px;
     background-color: #1e1e1e
+}
+.account, .profile, .logout{
+    padding: 1.2vmax;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;    
+    justify-content: flex-start;
+    border-radius: 24px;
+    background-color: #1e1e1e
+}
+.account-section{
+    padding: 20px 1vw;
+}
+.entireHeight{
+    min-height: calc(90.5vh - 2.4vmax);
+}
+.section-bar{
+    display: flex;
+    flex-flow: row;
+}
+.input-bar{
+    width: 30vw;
+    max-width: 400px;
+    height: 18px;
+    min-width: 144px;
+    height: 20px;
+    background-color: #1e1e1e;
+    border-radius: 20px;
+    padding: 0.3rem;
+    padding-left: 0.5rem;
+    outline: none;
+}
+.submit-button{
+    background-color: inherit;
+}
+.submit-button:hover{
+    animation-name: togrey;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+/* .profile-section{
+    padding: 20px;
+} */
+.plus-img{
+    filter:invert(0.1);
+}
+
+#playlist-search-bar{
+    margin-top: 1em;
+}
+.search-results{
+    width: 80%;
+    background-color: #0E0E0E;
+    border-radius: 12px;
+    padding: 1em;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+.result-item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+.item-add-img{
+    height: 1.2em;
+    margin-left: auto;
+}
+.playlist-item-play{
+    height: 1.6em;
+    filter: invert(1);
+}
+.playlist-item-cover{
+    height: 3.2em;
+    border-radius: 8px;
+}
+.playlist{
+    padding: 1em;
+}
+.playlist-song{
+    display: flex;
+    align-items: center;
+    align-content: space-between;
+    gap: 1em;
+    padding: 0.5em;
+}
+.underlined{
+    text-decoration: underline;
+}
+#profile-options{
+    height: 55px;
+    width: 55px;
+    filter:invert(1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none;
+}
+#profile-options:hover{
+    animation-name: togrey;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+.profile-icon{
+    aspect-ratio: 1/1;
+    height: 45px;
+    border-radius: 50px;
+}
+.profile-menu{
+    position: absolute;
+    top: 55px;
+    right: 2vw;
+    background-color: #1e1e1e;
+    border-radius: 20px;
+}
+div > ol{
+    padding: 0;
+    margin: 0;
+}
+.menu-button{
+    margin: 0;
+    background-color: #1e1e1e;
+    padding: 5px 20px;
+}
+#confirm-logout{
+    filter: drop-shadow(2px 4px 6px black);
+}
+.sign-up-ext{
+    margin-top: 2em;
+}
+.clear-input{
+    margin-left: -35px;
+    background-color: transparent;
+    border: none;
+    border-radius: 24px;
+}
+.clear-input:hover{
+    background-color: #4e4e4e;
+}
+input:hover{
+    animation-name: togrey;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
 }

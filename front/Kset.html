@@ -44,10 +44,11 @@
                         <div class="bar2"></div>
                         <div class="bar3"></div> 
                     </div>
-                    <div class="search-bar">
-                        <!-- <form role="search"> -->
-                        <input class="text serach-input fade" type="text" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
-                        <!-- </form> -->
+                    <div id="search-bar" class="search-bar">
+                        <form>
+                            <input type="text" class="text search-input fade" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
+                            <input id="cancel-search" type="reset" class="text clear-input" value="X">
+                        </form>
                     </div>
                     
                     
@@ -57,14 +58,36 @@
                     <button id="nav-login" class="button">
                         <b class="text">LOG IN</b>
                     </button>
+                    <button id="profile-options" class="button hide-floating">
+                        <img id="profile-image" src="assets/profile.webp" class="profile-icon">
+                    </button>
                 </div>
+            </div>
+            <div id="profile-menu" class="profile-menu hide-floating">
+                <ol><button id="account-button" class="button menu-button"><b class="text">Account</b></button></ol>
+                <ol><button id="profile-button" class="button menu-button"><b class="text">Profile</b></button></ol>
+                <ol><button id="logout-button" class="button menu-button"><b class="text">Log Out</b></button></ol>
             </div>
             <div id="main-menu"></div>
             <div class="spacer"></div>
             <div id="content" class="content"></div>
-            <div id="playlist-selection" class="playlist-selection hide-floating"></div>
+            <div id="playlist-selection" class="playlist-selection entireHeight hide-floating"><b class="text">Playlists</b>
+                <input class="text sign-inputs fade" type="text" id="playlist-search-bar-2" placeholder="Search to add songs...">
+                <div id="search-results-2" class="search-results"></div></div>
+            <div id="account" class="account entireHeight hide-floating"><b class="text">Your Account Information</b></div>
+            <div id="profile" class="profile entireHeight hide-floating"><b class="text">Your Profile</b><hr/>
+            <b class="text">Your Top Artist</b>
+            <div class="artist-wrapper">
+                <img src="assets/vald.webp" class="artist-profile"/>
+                <b class="text">Vald</b>
+                <div class="songs">
+                    <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/XEU.webp"><b class="text">Désaccordé</b></div>
+                    <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/V.webp"><b class="text">Anunnaki</b></div>
+                </div>
+            </div>
+            <div id="logout" class="logout hide-floating"><b class="text">Logout Page</b></div>
             <div class="footerspacer"></div>
-            <div id="footer" class="footer">
+            <div id="footer" class="footer hide-floating">
                 <img id="miniCover" src="" class="miniCover">
                 <div class="bottom">
                     <audio id="audio" controls>
@@ -78,29 +101,72 @@
     <div id="floating" class="floating">
         <div id="login" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
-            <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username">
-            <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password">
+            <form>
+                <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
             <button id="button-login" class="text sign-button fade">
                 <b class="text">LOG IN</b>
             </button>
+            <b class="text sign-up-ext">Or log in with :</b>
+            <div><img src="assets/facebook.webp" class="signup-logo"/>
+                <img src="assets/google.webp" class="signup-logo"/></div>
         </div>
         <div id="signup" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
-            <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username">
-            <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special">
-            <input type="text" class="text sign-inputs fade" placeholder="name">
-            <input type="text" class="text sign-inputs fade" placeholder="email">
-            <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx">
-            <a href="#" class="text">Terms of use</a>
+            <form>
+                <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input type="text" class="text sign-inputs fade" placeholder="name">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input type="text" class="text sign-inputs fade" placeholder="email">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <div><input type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
             <button id="button-signup" class="text sign-button fade">
                 <b class="text">SIGN UP</b>
             </button>
+            <b class="text sign-up-ext">Or sign up with :</b>
+            <div><img src="assets/facebook.webp" class="signup-logo"/>
+                <img src="assets/google.webp" class="signup-logo"/></div>
+            
         </div>
         <div id="create-playlist" class="sign hide-floating">
-            <img class="sign-img" src="assets/plus.webp">
-            <input type="text" class="text sign-inputs fade" placeholder="Playlist Name">
+            <form>
+                <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input class="text sign-inputs fade" type="text" id="playlist-search-bar" onkeyup="searchSongs()" placeholder="Search to add songs...">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <div id="search-results" class="search-results">
+                
+            </div>
             <button id="button-playlist" class="text sign-button fade">
                 <b class="text">Create Playlist</b>
+            </button>
+        </div>
+        <div id="logout-window" class="sign hide-floating">
+            <b class="text">Are you sure you want to Log Out?</b>
+            <button id="confirm-logout" class="text sign-button fade">
+                <b class="text">Yes, Log Out.</b>
             </button>
         </div>
     </div>
