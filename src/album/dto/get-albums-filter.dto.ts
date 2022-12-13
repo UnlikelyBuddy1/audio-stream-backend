@@ -10,7 +10,7 @@ export class GetAlbumsFilterDto {
 
     @IsOptional()
     @IsNumberString()
-    @MaxLength(2)
+    @MaxLength(3)
     size: number;
 
 }
