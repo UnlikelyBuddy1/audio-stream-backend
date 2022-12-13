@@ -70,7 +70,7 @@
                 </form>
                 <!-- Profile Button -->
                 <button id="profile-options" class="profile-options button">
-                    <img id="profile-image" class="profile-icon" src="assets/profile.webp">
+                    <img id="profile-image" alt="your profile image" class="profile-icon" src="assets/profile.webp">
                 </button>
             </div>
 
@@ -86,8 +86,8 @@
 
             <!-- Playlist -->
             <div id="playlist-selection" class="playlist-selection entireHeight hide-floating"><b class="text">Playlists</b>
-                <input class="text sign-inputs fade" type="text" id="playlist-search-bar-2" placeholder="Search to add songs..."/>
-                <div id="search-results-2" class="search-results"></div>
+
+                
             </div>
             
             <!-- Account Page -->
@@ -101,7 +101,7 @@
             <!-- Audio Player Footer -->
             <div id="footer" class="footer hide-floating"> 
                 <div id="audio-player" class="audio-player">
-                    <img id="miniCover" src="" class="miniCover"/>
+                    <img id="miniCover" alt="a miniature of the cover of the songs that's playing" src="" class="miniCover"/>
                     <div class="track-information">
                         <b id="track-title" class="track-title text"></b>
                         <a id="track-artist" class="track-artist text"></a>
@@ -114,7 +114,7 @@
                     <div class="volume-controls">
                         <div id="speaker-icon">
                             <img id="unmuted-speaker" src="assets/speaker.webp" alt="an icon of a speaker" class="speaker logo">
-                            <img id="muted-speaker" src="assets/muted_speaker.webp" alt="an icon of a speaker" class="speaker logo hide-floating">
+                            <img id="muted-speaker" src="assets/muted_speaker.webp" alt="an icon of a muted speaker" class="speaker logo hide-floating">
                         </div>
                         <input type="range" id="volume-slider" class="volume-slider" max="100" value="100">
                     </div>
@@ -129,7 +129,7 @@
 
         <!-- Login Window -->
         <div id="login" class="sign hide-floating">
-            <img class="sign-img" src="assets/login.webp">
+            <img class="sign-img" src="assets/login.webp" alt="an image that portrais the idea of loging in">
             <ul class="error-messages text">
                 <li id="incorrect-field" class="hide-floating"><b >Incorect username or password, please try again</b></li>
             </ul>
@@ -145,15 +145,15 @@
             </button>
             <b class="sign-up-ext text">Log in with :</b>
             <div>
-                <img src="assets/facebook.webp" class="signup-logo"/>
-                <img src="assets/google.webp" class="signup-logo"/>
+                <img src="assets/facebook.webp" class="signup-logo" alt="the facebook logo"/>
+                <img src="assets/google.webp" class="signup-logo" alt="the google logo"/>
             </div>
             <b class="text">Or <u>create an account</u> for free</b>
         </div>
 
         <!-- Sign Up Window -->
         <div id="signup" class="sign hide-floating">
-            <img class="sign-img" src="assets/login.webp">
+            <img class="sign-img" src="assets/login.webp" alt="the log in image">
             <ul class="error-messages text">
                 <li id="signup-no-account" class="hide-floating"><b>Please enter a username</b></il>
                 <li id="signup-account-error" class="hide-floating"><b>An account with that username already exists, please try another name or <u>sign in here</u>.</b></il>
@@ -184,8 +184,8 @@
                 <b class="text">SIGN UP</b>
             </button>
             <b class="text sign-up-ext">Or sign up with :</b>
-            <div><img src="assets/facebook.webp" class="signup-logo"/>
-                <img src="assets/google.webp" class="signup-logo"/></div>
+            <div><img src="assets/facebook.webp" class="signup-logo" alt="facebook logo"/>
+                <img src="assets/google.webp" class="signup-logo" alt="google logo"/></div>
         </div>
 
         <!-- Create Playlist Window -->
@@ -193,13 +193,8 @@
             <form>
                 <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
-            <form>
-                <input id="playlist-search-bar" class="playlist-search-bar text sign-inputs fade" type="text" onkeyup="searchSongs()" placeholder="Search to add songs..."><input type="reset" class="text clear-input" value="X"></input>
-            </form>
-            <div id="search-results" class="search-results">
-                
-            </div>
-            <button id="button-playlist" class="text sign-button">
+            
+            <button id="button-playlist" class="sign-button button ">
                 <b class="text">Create Playlist</b>
             </button>
         </div>

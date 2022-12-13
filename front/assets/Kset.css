@@ -129,17 +129,20 @@ button:hover{
 .login-kset-logo{
     animation: glowup 10000ms ease-in-out;
     animation-fill-mode: forwards;
-
+    
 }
 @keyframes glowup {
     0% {
-        filter: brightness(0.75);
+        filter: brightness(0.75) drop-shadow(0px 0px 0px black);
     }
     20% {
-        filter: brightness(0.75);
+        filter: brightness(0.75)
     }
     50% {
-        filter: brightness(1);
+        filter: brightness(1)
+    }
+    100% {
+        filter: brightness(1) drop-shadow(5px 10px 6px black);
     }
 }
 
@@ -162,7 +165,7 @@ button:hover{
     border: #de6c1a solid 2px;
 }
 .login-button{
-    background-color: #de6c1a;
+    background-color: #de6c1a !important;
     border: none;
 }
 
@@ -183,7 +186,7 @@ button:hover{
 
 /* Left Column */
 .left-column{
-    width: 25vw;
+    width: 250px;
     margin-top: 65px;
     height: calc(100vh - 75px);
     position: sticky;
@@ -195,8 +198,7 @@ button:hover{
 
 /* Sidebar */
 .sidebar{
-    width: 100%;
-    max-width: 300px;
+    width: 250px;
     box-sizing: border-box;
     height: 100%;
     padding: 1%;
@@ -423,13 +425,14 @@ div > ol{
     animation-fill-mode: forwards;
 }
 .track:hover > .play-wrapper {
+    display: block;
     animation-name: show-up;
     animation-duration: 500ms;
     animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     animation-fill-mode: forwards;
 }
 .track:hover > .like-wrapper {
-    opacity: 1;
+    display: block;
 }
 .cover{
     width: 100%;
@@ -442,7 +445,7 @@ div > ol{
     width: 10%;
     margin-bottom: -75%;
     margin-top: 32.5%;
-    opacity: 0;
+    display: none;
     pointer-events: none;
 }
 .play{
@@ -452,7 +455,7 @@ div > ol{
 }
 .like-wrapper{
     width: 10%;
-    opacity: 0;
+    display: none;
     height: 0;
 }
 .like{
@@ -497,7 +500,8 @@ div > ol{
     flex-flow: column;
     justify-content: flex-start;
     border-radius: 24px;
-    background-color: #1e1e1e
+    background-color: #1e1e1e;
+    margin-top: 1vh;
 }
 .playlist-search-bar{
     margin-top: 1em;
@@ -558,8 +562,32 @@ div > ol{
     border-radius: 20px;
     padding: 0.5em;
     margin: 1em;
+    background-color: #1e1e1e;
+    border-color: #f1f1f1;
+    border-width: 2px;
 }
 
+.playlist-wrapper{
+    background-color: #111;
+    border-radius: 24px;
+    padding: 1em;
+    margin: 1em 0em;
+}
+
+.big-text{
+    font-size: 2rem;
+}
+.covers-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 320px;
+    max-height: 320px;
+    border-radius: 12px;
+}
+.small-cover{
+    height: 80px;
+    width: 80px;
+}
 /*Artist Page, also used for profile page*/
 
 .artist-profile,.profile{
@@ -673,9 +701,10 @@ div > ol{
 
 /* Audio Player */
 .footer{ /* Footer for audio Player */
-    position: absolute;
+    position: fixed;
+    left: calc(1.2vw + 250px);
     bottom: 0px;
-    width: calc(98.5vw - 250px);
+    width: calc(98.2vw - 250px);
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -749,14 +778,14 @@ div > ol{
     color:#4e4e4e;
     padding: 0 5px;
     position: absolute;
-    top: 0;
+    top: 5px;
     font-size: 0.75rem;
 }
 .current-time{
     left: 70px;
 }
 .duration{
-    right: 0;
+    right: 35px;
 }
 input[type="range"] {
     position: absolute;
@@ -775,7 +804,7 @@ input[type="range"] {
     position: absolute;
     width: 10%;
     padding: 0;
-    right: 30px;
+    right: 65px;
     bottom: 0;
     padding: 0;
     display: flex;
@@ -995,12 +1024,10 @@ input[type="range"]:active::-ms-thumb {
 }
 @keyframes show-up {
     from {
-        opacity: 0;
         margin-top: 42.5%;
         margin-bottom: -85%;
     }
     to {
-        opacity: 1;
         margin-bottom: -75%;
         margin-top: 32.5%;
     }
@@ -1152,6 +1179,12 @@ input[type="range"]:active::-ms-thumb {
     }
     .seek-slider {
         margin: 0 0 0 5%;
+    }
+    .track-title, .track-artist{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 145px;
     }
 }
 @media screen and (max-width:460px) { /* Phones */

@@ -12,8 +12,7 @@ const signupPassword = document.getElementById("signup-password");
 // document.getElementById("signup-password").value;
 document.getElementById('seek-slider').max = 0;
 const volumeSlider = document.getElementById('volume-slider');
-const loginButton = document.getElementById('login-button');
-const signupButton = document.getElementById('signup-button');
+
 let playState = null;
 let volume = 100;
 
@@ -88,43 +87,34 @@ function signup(username, password) { // Signup Function
 }
 function fill(){
   let content = document.getElementById("content");
-  fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+  fetch('https://kset.home.asidiras.dev/genre/?search&index=0&size=99', {method: 'GET'})
   .then((response) => response.json())
-  .then((data) => {
-    data.sort(function(a, b) {
-      let keyA = a.title.toUpperCase();
-      let keyB = b.title.toUpperCase();
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
-      return 0;
-    });
-    let prevletter = ""
-    for(let i=0; i<data.length; i++){
-      let letter = isNaN(data[i]["title"][0])? data[i]["title"][0].toUpperCase(): "number"
-      if(prevletter != letter){
-        prevletter = letter;
-        const section = document.createElement('h3');
-        section_text = document.createTextNode(`Songs starting with ${letter}`);
-        section.appendChild(section_text);
-        section.classList.add('text');
-        section.classList.add('section');
-        content.appendChild(section);
-      }
-      const artist = fetch(`https://kset.home.asidiras.dev/artist/${data[i].artists[0]}`, {method: 'GET'}).then((response) => response.json()).then((artist) => {
-        track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], artist.name);
-        content.appendChild(track);
+  .then((genres) => {
+    genres.map((genre) => {
+      let section = document.createElement('h3');
+      section_text = document.createTextNode(genre.name);
+      section.appendChild(section_text);
+      section.classList.add('text');
+      section.classList.add('section');
+      content.appendChild(section);
+      console.log(genre);
+      genre.tracks.map((track) => {
+          let artists = (track.artists.map((artist) => {return artist.name})).join(', ');
+          let DOM_track = createTrack(track["cover"], track["path"], track["title"], artists);
+          content.appendChild(DOM_track);
+        });
+        const spacer = document.createElement('div');
+        content.appendChild(spacer);
       });
-    }
-    const spacer = document.createElement('div');
-    // spacer.classList.add('spacer');
-    content.appendChild(spacer);
-  })
-}
+    });
+  }
+
 function createPlaylist(playlist, location){
   let playlistdom = document.createElement('div');
-  playlistdom.classList.add('playlist');
+  playlistdom.classList.add('playlist-wrapper');
   let name = document.createElement('b');
   name.classList.add('text');
+  name.classList.add('big-text');
   name.classList.add('underlined');
   name.textContent = playlist.name;
   let playlistSongs = document.createElement('div');
@@ -668,6 +658,7 @@ function createTrack(imgSrc, songSrc, title, artist){
   const cover = document.createElement('img');
   cover.setAttribute("id", `${songSrc}|${imgSrc}`);
   cover.setAttribute("loading", "lazy");
+  cover.setAttribute("alt", `${title} by ${artist}`);
   cover.classList.add('cover');
   cover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
 
@@ -1037,28 +1028,28 @@ document.getElementById('button-playlist').addEventListener('click', function(){
   }})
 }
 );
-document.getElementById("playlist-search-bar").addEventListener('keyup', ()=>{ // Song Search for Playlists
-  let search = document.getElementById("playlist-search-bar").value;
-  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
-  .then((response) => response.json())
-  .then((data) => {
-    document.getElementById('search-results').innerHTML='';
-    for(let result of data){
-      createSearchResult(result.title, result.id);
-    }
-  })
-})
-document.getElementById("playlist-search-bar-2").addEventListener('keyup', ()=>{ // Song Search for Playlists 2
-  let search = document.getElementById("playlist-search-bar-2").value;
-  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
-  .then((response) => response.json())
-  .then((data) => {
-    document.getElementById('search-results-2').innerHTML='';
-    for(let result of data){
-      createSearchResult(result.title, result.id, '-2');
-    }
-  })
-})
+// document.getElementById("playlist-search-bar").addEventListener('keyup', ()=>{ // Song Search for Playlists
+//   let search = document.getElementById("playlist-search-bar").value;
+//   fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
+//   .then((response) => response.json())
+//   .then((data) => {
+//     document.getElementById('search-results').innerHTML='';
+//     for(let result of data){
+//       createSearchResult(result.title, result.id);
+//     }
+//   })
+// })
+// document.getElementById("playlist-search-bar-2").addEventListener('keyup', ()=>{ // Song Search for Playlists 2
+//   let search = document.getElementById("playlist-search-bar-2").value;
+//   fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
+//   .then((response) => response.json())
+//   .then((data) => {
+//     document.getElementById('search-results-2').innerHTML='';
+//     for(let result of data){
+//       createSearchResult(result.title, result.id, '-2');
+//     }
+//   })
+// })
 playPauseContainer.addEventListener('click', () => { // Switch Play and Pause Icons
   if (playState === 'play') {
     audio.play();
@@ -1103,10 +1094,10 @@ volumeSlider.addEventListener('input', () => {
     document.getElementById("unmuted-speaker").classList.toggle("hide-floating");
   }
 });
-loginButton.addEventListener('click', () => {
+document.getElementById('login-button').addEventListener('click', () => {
   toggleLogin();
 })
-signupButton.addEventListener('click', () => {
+document.getElementById('signup-button').addEventListener('click', () => {
   toggleSignup();
 })
 document.getElementById("speaker-icon").addEventListener('click', () => {
