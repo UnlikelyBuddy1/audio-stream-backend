@@ -3,173 +3,216 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Interfaces</title>
+    <link class = "favicon" rel="icon" href="assets/icon_notext.webp" type="image/webp">
     <link rel="stylesheet" href="assets/Kset.css">
 </head>
 <body>
-    <div id="wrapper" class="wrapper">
+
+    <!-- Login Page -->
+    <div id="login-page" class="login-page">
+        <img id="login-kset-logo" class="login-kset-logo logo" src="assets/icon.webp" alt="a cassette that is the logo of the app">
+        <div class="entry-buttons">
+            <button id="signup-button" class="signup-button button text">Sign Up</button>
+            <button id="login-button" class="login-button button text">Log In</button>
+        </div>
+    </div>
+
+    <div id="wrapper" class="wrapper hide-floating">
+
         <!-- Left Column -->
         <div id="left-column" class="left-column hidden">
-            <div id="sidebar" class="sidebar">
-                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo menu-logo">
-                <button id="home" class="sidebarButton" onclick="switchContent('content')">
-                    <img src="assets/home.webp" alt="an icon of a house" class="sidebarIcon">
-                    <b class = "text sidebarText">Home</b>
+            <div class="sidebar">
+                <!-- Home Button -->
+                <button class="sidebarButton fancy-link" onclick="switchContent('content')">
+                    <img src="assets/home.webp" alt="an icon of a house" class="sidebarIcon"/>
+                    <b class = "text">Home</b>
                 </button>
-                <button id="playlist" class="sidebarButton" onclick="switchContent('playlist-selection')">
-                    <img src="assets/playlist.webp" alt="a playlist" class="sidebarIcon">
-                    <b class = "text sidebarText">PlayLists</b>
+                <!-- Playlist Button -->
+                <button class="sidebarButton fancy-link" onclick="switchContent('playlist-selection')">
+                    <img src="assets/playlist.webp" alt="a playlist" class="sidebarIcon"/>
+                    <b class = "text">PlayLists</b>
                 </button>
-                <button id="new-playlist" class="sidebarButton">
-                    <img src="assets/plus.webp" alt="a plus symbol" class="sidebarIcon">
-                    <b class = "text sidebarText">New Playlist</b>
+                <!-- New Playlist Button -->
+                <button id="new-playlist" class="sidebarButton fancy-link">
+                    <img src="assets/plus.webp" alt="a plus symbol" class="sidebarIcon"/>
+                    <b class = "text">New Playlist</b>
                 </button>
-                <button onclick="window.open('https://github.com/UnlikelyBuddy1/Kset-uc3m-project')" type="button" class="sidebarButton">
-                    <img src="assets/github.webp" alt="github logo" id="github" class="sidebarIcon">
-                    <b class = "text sidebarText">GitHub</b>
+                <!-- GitHub Button -->
+                <button onclick="window.open('https://github.com/UnlikelyBuddy1/Kset-uc3m-project')" type="button" class="sidebarButton fancy-link">
+                    <img src="assets/github.webp" alt="github logo" class="sidebarIcon">
+                    <b class="text">GitHub</b>
                 </button>
+                <!-- Privacy & Cookies Links -->
                 <div class="link">
                     <a href="#" class="text">Privacy</a>
                     <a href="#" class="text">Cookies</a>
                 </div>
-                
             </div>
         </div>
+
         <!-- Right Column -->
-        <div id ="right_column" class="right_column">
-            <div class="navbar-wrapper">
-                <div id="navbar" class="navbar"> 
-                    <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo top-logo">
-                    <div class="container" onclick="burger(this)"> 
-                        <div class="bar1"></div>
-                        <div class="bar2"></div>
-                        <div class="bar3"></div> 
-                    </div>
-                    <div id="search-bar" class="search-bar">
-                        <form>
-                            <input type="text" class="text search-input fade" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
-                            <input id="cancel-search" type="reset" class="text clear-input" value="X">
-                        </form>
-                    </div>
-                    
-                    
-                    <button id="nav-signup" class="button">
-                        <b class="text">SIGN UP</b>
-                    </button> 
-                    <button id="nav-login" class="button">
-                        <b class="text">LOG IN</b>
-                    </button>
-                    <button id="profile-options" class="button hide-floating">
-                        <img id="profile-image" src="assets/profile.webp" class="profile-icon">
-                    </button>
+        <div id ="right-column" class="right-column">
+
+            <!-- Navigation Bar -->
+            <div class="navbar"> 
+                <!-- Logo -->
+                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="logo">
+                <!-- Menu Button for Smaller Screens -->
+                <div class="container" onclick="burger(this)"> 
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
                 </div>
+                <!-- Search Bar -->
+                <form id="search-bar" class="search-bar">
+                    <input type="text" class="text search-input" id="mySearch" placeholder="Search for a song..."/>
+                    <input type="reset" id="cancel-search" class="text clear-input" tabindex="-1" value="X"/>
+                </form>
+                <!-- Profile Button -->
+                <button id="profile-options" class="profile-options button">
+                    <img id="profile-image" class="profile-icon" src="assets/profile.webp">
+                </button>
             </div>
+
+            <!-- Profile Options -->
             <div id="profile-menu" class="profile-menu hide-floating">
-                <ol><button id="account-button" class="button menu-button"><b class="text">Account</b></button></ol>
-                <ol><button id="profile-button" class="button menu-button"><b class="text">Profile</b></button></ol>
-                <ol><button id="logout-button" class="button menu-button"><b class="text">Log Out</b></button></ol>
+                <ol><button id="account-button" class="button menu-button fancy-link"><b class="text">Account</b></button></ol>
+                <ol><button id="profile-button" class="button menu-button fancy-link"><b class="text">Profile</b></button></ol>
+                <ol><button id="logout-button" class="button menu-button fancy-link"><b class="text">Log Out</b></button></ol>
             </div>
-            <div id="main-menu"></div>
-            <div class="spacer"></div>
+
+            <!-- Content is Filled with JS -->
             <div id="content" class="content"></div>
+
+            <!-- Playlist -->
             <div id="playlist-selection" class="playlist-selection entireHeight hide-floating"><b class="text">Playlists</b>
-                <input class="text sign-inputs fade" type="text" id="playlist-search-bar-2" placeholder="Search to add songs...">
-                <div id="search-results-2" class="search-results"></div></div>
-            <div id="account" class="account entireHeight hide-floating"><b class="text">Your Account Information</b></div>
-            <div id="profile" class="profile entireHeight hide-floating"><b class="text">Your Profile</b><hr/>
-            <b class="text">Your Top Artist</b>
-            <div class="artist-wrapper">
-                <img src="assets/vald.webp" class="artist-profile"/>
-                <b class="text">Vald</b>
-                <div class="songs">
-                    <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/XEU.webp"><b class="text">Désaccordé</b></div>
-                    <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/V.webp"><b class="text">Anunnaki</b></div>
-                </div>
+                <input class="text sign-inputs fade" type="text" id="playlist-search-bar-2" placeholder="Search to add songs..."/>
+                <div id="search-results-2" class="search-results"></div>
             </div>
-            <div id="logout" class="logout hide-floating"><b class="text">Logout Page</b></div>
-            <div class="footerspacer"></div>
-            <div id="footer" class="footer hide-floating">
-                <img id="miniCover" src="" class="miniCover">
-                <div class="bottom">
-                    <audio id="audio" controls>
-                        <source id="source" src="" type="audio/mpeg">
-                    </audio>   
-                    <b id="banner" class="signup-banner text"><a class="signup-banner text accent-color" href=#>Signing up</a> for free</b>                 
+            
+            <!-- Account Page -->
+            <div id="account" class="account entireHeight hide-floating"><b class="text">Your Account Information</b></div>
+            <!-- Profile Page -->
+            <div id="profile" class="profile entireHeight hide-floating"></div>
+
+            <!-- Artist Page-->
+            <div id="artist-profile" class="artist-profile entireHeight hide-floating"></div>
+
+            <!-- Audio Player Footer -->
+            <div id="footer" class="footer hide-floating"> 
+                <div id="audio-player" class="audio-player">
+                    <img id="miniCover" src="" class="miniCover"/>
+                    <div class="track-information">
+                        <b id="track-title" class="track-title text"></b>
+                        <a id="track-artist" class="track-artist text"></a>
+                    </div>
+                    <audio id="audio" src="" type="audio/mpeg"></audio>
+                    <div id="play-pause-container" class="play-pause-container"></div>
+                    <span id="current-time" class="current-time text">0:00</span>
+                    <input type="range" id="seek-slider" class="seek-slider" max="100" value="0">
+                    <span id="duration" class="duration text">0:00</span>
+                    <div class="volume-controls">
+                        <div id="speaker-icon">
+                            <img id="unmuted-speaker" src="assets/speaker.webp" alt="an icon of a speaker" class="speaker logo">
+                            <img id="muted-speaker" src="assets/muted_speaker.webp" alt="an icon of a speaker" class="speaker logo hide-floating">
+                        </div>
+                        <input type="range" id="volume-slider" class="volume-slider" max="100" value="100">
+                    </div>
                 </div>
             </div> 
+
         </div>
     </div> 
-    <div id="floating" class="floating">
+
+    <!-- Floating Menus -->
+    <div class="floating">
+
+        <!-- Login Window -->
         <div id="login" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
+            <ul class="error-messages text">
+                <li id="incorrect-field" class="hide-floating"><b >Incorect username or password, please try again</b></li>
+            </ul>
+            
             <form>
-                <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
             <form>
-                <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
-            <button id="button-login" class="text sign-button fade">
+            <button id="button-login" class="login-button sign-button button text">
                 <b class="text">LOG IN</b>
             </button>
-            <b class="text sign-up-ext">Or log in with :</b>
-            <div><img src="assets/facebook.webp" class="signup-logo"/>
-                <img src="assets/google.webp" class="signup-logo"/></div>
+            <b class="sign-up-ext text">Log in with :</b>
+            <div>
+                <img src="assets/facebook.webp" class="signup-logo"/>
+                <img src="assets/google.webp" class="signup-logo"/>
+            </div>
+            <b class="text">Or <u>create an account</u> for free</b>
         </div>
+
+        <!-- Sign Up Window -->
         <div id="signup" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
+            <ul class="error-messages text">
+                <li id="signup-no-account" class="hide-floating"><b>Please enter a username</b></il>
+                <li id="signup-account-error" class="hide-floating"><b>An account with that username already exists, please try another name or <u>sign in here</u>.</b></il>
+                <li id="signup-no-password" class="hide-floating"><b>Please enter a password</b></il>
+                <li id="signup-password-error" class="hide-floating"><b>Please make sure your password has at least 8 characters, with one uppercase and one  or special character.</b></il>
+                <li id="signup-terms-error" class="hide-floating"><b>Please accept the terms and conditions.</b></il>
+                <li id="signup-error" class="hide-floating"><b>There has been an unexpected error with the signup process, please try again later.</b></il>
+            </ul>
+            
             <form>
-                <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
-                <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="name">
-                <input type="reset" class="text clear-input" value="X">
+                <input type="text" class="text sign-inputs fade" placeholder="name"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
+                
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="email">
-                <input type="reset" class="text clear-input" value="X">
+                <input type="text" class="text sign-inputs fade" placeholder="email"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx">
-                <input type="reset" class="text clear-input" value="X">
+                <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
-            <div><input type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
-            <button id="button-signup" class="text sign-button fade">
+            <div><input id="signup-checkbox" type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
+            <button id="button-signup" class="signup-button sign-button button text">
                 <b class="text">SIGN UP</b>
             </button>
             <b class="text sign-up-ext">Or sign up with :</b>
             <div><img src="assets/facebook.webp" class="signup-logo"/>
                 <img src="assets/google.webp" class="signup-logo"/></div>
-            
         </div>
+
+        <!-- Create Playlist Window -->
         <div id="create-playlist" class="sign hide-floating">
             <form>
-                <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
             <form>
-                <input class="text sign-inputs fade" type="text" id="playlist-search-bar" onkeyup="searchSongs()" placeholder="Search to add songs...">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="playlist-search-bar" class="playlist-search-bar text sign-inputs fade" type="text" onkeyup="searchSongs()" placeholder="Search to add songs..."><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <div id="search-results" class="search-results">
                 
             </div>
-            <button id="button-playlist" class="text sign-button fade">
+            <button id="button-playlist" class="text sign-button">
                 <b class="text">Create Playlist</b>
             </button>
         </div>
+
+        <!-- Logout Window -->
         <div id="logout-window" class="sign hide-floating">
             <b class="text">Are you sure you want to Log Out?</b>
-            <button id="confirm-logout" class="text sign-button fade">
+            <button id="confirm-logout" class="confirm-logout button text sign-button">
                 <b class="text">Yes, Log Out.</b>
             </button>
         </div>
+
     </div>
 </body>
-</html> 
+</html>
 <script src="assets/page.js"></script>
