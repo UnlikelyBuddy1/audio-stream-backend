@@ -16,6 +16,7 @@ export class TrackRepository extends Repository<Track> {
         const toSkip = index*size;
         const toTake = size;
         const query = this.createQueryBuilder('track');
+        query.loadAllRelationIds();
         try {
             //query.where('track.userId = :userId', { userId: user.id });
             if(search){
