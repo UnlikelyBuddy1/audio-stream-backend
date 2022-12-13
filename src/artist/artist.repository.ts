@@ -18,6 +18,7 @@ export class ArtistRepository extends Repository<Artist> {
         const toSkip = index*size;
         const toTake = size;
         const query = this.createQueryBuilder('artist');
+        query.loadAllRelationIds();
         try {
             //query.where('artist.userId = :userId', { userId: user.id });
 
