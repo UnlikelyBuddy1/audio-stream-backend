@@ -16,7 +16,10 @@ export class GenreRepository extends Repository<Genre> {
         const toSkip = index*size;
         const toTake = size;
         const query = this.createQueryBuilder('genre');
-        query.loadAllRelationIds();
+        query.leftJoinAndSelect("genre.tracks", "tracks")
+        query.leftJoinAndSelect("tracks.artists", "artists")
+        query.leftJoinAndSelect("tracks.albums", "albums")
+
         try {
             if(search){ 
                 query.where('genre.name like :search', {search: `%${search}%`});
